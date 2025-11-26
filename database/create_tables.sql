@@ -20,3 +20,18 @@ CREATE TABLE IF NOT EXISTS favorites (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE -- If a user is deleted, their favorites are also deleted
 );
+
+--Meal plans tavle
+CREATE TABLE IF NOT EXISTS meal_plans(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    monday VARCHAR(50),
+    tuesday VARCHAR(50),
+    wednesday VARCHAR(50),
+    thursday VARCHAR(50),
+    friday VARCHAR(50),
+    saturday VARCHAR(50),
+    sunday VARCHAR(50),
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, --This updates the timestamp whenever the meal plan is updated
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);

@@ -15,12 +15,12 @@
   <header>
     <nav class="main-nav">
       <div class="logo">
-        <a href=Home.php">Gather & Savor</a>
+        <a href="Home.php">Gather & Savor</a>
       </div>
       <ul class="nav-links">
         <li><a href="Home.php">Home</a></li>
         <li><a href="Recipes.php">Recipes</a></li>
-        <li><a href="meal-plannet.php">Meal Planner</a></li>
+        <li><a href="meal-planner.php">Meal Planner</a></li>
         <li><a href="favorites.php">Favorites</a></li>
         <li><a href="Shopping-list.php" class="active">Shopping List</a></li>
         <li><a href="Login.php">Login</a></li>

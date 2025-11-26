@@ -35,3 +35,13 @@ CREATE TABLE IF NOT EXISTS meal_plans(
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, --This updates the timestamp whenever the meal plan is updated
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+--Shopping Lists Table
+CREATE TABLE IF NOT EXISTS shopping_lists(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    ingredient VARCHAR(255) NOT NULL,
+    quantity VARCHAR(100),
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);

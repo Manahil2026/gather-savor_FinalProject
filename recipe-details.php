@@ -42,7 +42,7 @@
 			</div>
 
 			<div class="recipe-columns">
-				<div class="indredients-column">
+				<div class="ingredients-column">
 					<h3>Ingredients</h3>
 					<ul id="ingredients-list">
 						<li>Ingredient placeholder</li>

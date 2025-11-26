@@ -24,7 +24,7 @@
         <li><a href="favorites.php" class="active">Favorites</a></li>
         <li><a href="Shopping-list.php">Shopping List</a></li>
         <li><a href="Login.php">Login</a></li>
-        <li><a href="Register.php"></a></li>
+        <li><a href="Register.php">Register</a></li>
       </ul>
     </nav>
   </header>

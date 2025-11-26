@@ -6,7 +6,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gather & Savor | Login</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -32,9 +32,9 @@
     <section class="auth-card">
       <h1>Login</h1>
       <form id="login-form" method="post" action="Login.php">
-        <div lass="form-group">
+        <div class="form-group">
           <label for="login-email">Email</label>
-          <input type="email" id="lgoin-email" name="email" required>
+          <input type="email" id="login-email" name="email" required>
         </div>
 
         <div class="form-group">

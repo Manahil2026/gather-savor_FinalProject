@@ -28,7 +28,7 @@
     </nav>
   </header>
 
-  <main lass="page-container auth-page">
+  <main class="page-container auth-page">
     <section class="auth-card">
       <h1>Create an Account</h1>
       <form id="register-form" method="post" action="Register.php">
@@ -43,7 +43,7 @@
         </div>
 
         <div class="form-group">
-          <label for="reg-confrim">Confirm Password</label>
+          <label for="reg-confirm">Confirm Password</label>
           <input type="password" id="reg-confirm" name="confirm_password" required>
         </div>
 

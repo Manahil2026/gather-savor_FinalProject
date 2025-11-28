@@ -31,7 +31,7 @@ try{
     $stmt->execute([':email' => $email]); //Execute the prepared statemnt with the email parameter
     $user = $stmt->fetch(PDO::FETCH_ASSOC); //Fetch the user record as an associative array
 
-    if(!user){ // If no user record is found
+    if(!$user){ // If no user record is found
         redirect_with_msg('../../Login.php', 'error', 'Email not found.'); // Redirect to login page with error message
     }
 

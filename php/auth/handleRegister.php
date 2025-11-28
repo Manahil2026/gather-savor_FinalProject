@@ -57,7 +57,7 @@ try{
     $password_hash = password_hash($password, PASSWORD_DEFAULT); //password_hash is a built-in PHP function that hashes passwords
 
     // Finalllyyy after all the precautions: Insert the new user into the database
-    $stmt = $conn->prepare("INSERT INTO users (username, email, pssword) VALUES (:username. :email, :pssword)"); // Prepare SQL stmt to insert new user record into users table
+    $stmt = $conn->prepare("INSERT INTO users (username, email, pssword) VALUES (:username, :email, :pssword)"); // Prepare SQL stmt to insert new user record into users table
     $stmt->execute([':username' => $name, ':email' => $email, ':pssword' => $password_hash]); // Execute the prepared statement with the user data
     
     // Log the user in automatcally by storing session

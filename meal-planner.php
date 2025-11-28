@@ -1,5 +1,5 @@
 <?php
-// PLACEHOLDER for future PHP: load/save user's weekly meal plan.
+require_once __DIR__ . 'php/auth/checkSession.php'; // Include the session check to make sure user is logged in.
 ?>
 
 <!DOCTYPE html>

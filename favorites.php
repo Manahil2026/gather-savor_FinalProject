@@ -1,5 +1,5 @@
 <?php
-// PLACEHOLDER for future PHP: fetch and display user's saved favorite recipes.
+require_once __DIR__ . 'php/auth/checkSession.php'; // Include the session check to make sure user is logged in.
 ?>
 
 <!DOCTYPE html>

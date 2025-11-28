@@ -1,5 +1,5 @@
 <?php
-// placeholder for future PHP: show details for a single recipe (from API/DB).
+require_once __DIR__ . 'php/auth/checkSession.php'; // Include the session check to make sure user is logged in.
 ?>
 <!DOCTYPE html>
 <html>

@@ -1,5 +1,5 @@
 <?php
-// PLACEHOLDER for future PHP: handle registration form submission.
+session_start(); // Start a new session or resume existing one
 ?>
 
 <!DOCTYPE html>
@@ -31,6 +31,20 @@
   <main class="page-container auth-page">
     <section class="auth-card">
       <h1>Create an Account</h1>
+
+      <?php if (isset($_SESSION['error'])): ?> <!-- If there is an error message in the session, display it -->
+        <div class="alert error">
+          <?= $_SESSION['error']; unset($_SESSION['error']); ?> <!-- Display and then clear the error message -->
+        </div>
+      <?php endif; ?>
+
+      <?php if (isset($_SESSION['success'])): ?> <!-- If there is a success message in the session, display it -->
+        <div class="alert success">
+          <?= $_SESSION['success']; unset($_SESSION['success']); ?> <!-- Display and then clear the success message -->
+        </div>
+      <?php endif; ?>
+
+
       <form id="register-form" method="post" action="php/auth/handleRegister.php">
         <div class="form-group">
           <label for="reg-name">Name</label>

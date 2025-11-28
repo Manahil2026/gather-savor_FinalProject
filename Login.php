@@ -31,7 +31,7 @@
   <main class="page-container auth page">
     <section class="auth-card">
       <h1>Login</h1>
-      <form id="login-form" method="post" action="Login.php">
+      <form id="login-form" method="post" action="php/auth/handleLogin.php">
         <div class="form-group">
           <label for="login-email">Email</label>
           <input type="email" id="login-email" name="email" required>

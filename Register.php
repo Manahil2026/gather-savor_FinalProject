@@ -31,7 +31,7 @@
   <main class="page-container auth-page">
     <section class="auth-card">
       <h1>Create an Account</h1>
-      <form id="register-form" method="post" action="Register.php">
+      <form id="register-form" method="post" action="php/auth/handleRegister.php">
         <div class="form-group">
           <label for="reg-name">Name</label>
           <input type="text" id="reg-name" name="name" required>
@@ -40,6 +40,11 @@
         <div class="form-group">
           <label for="reg-email">Email</label>
           <input type="email" id="reg-email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-password">Password</label>
+          <input type="password" id="reg-password" name="password" required>
         </div>
 
         <div class="form-group">

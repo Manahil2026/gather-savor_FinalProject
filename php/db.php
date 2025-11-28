@@ -15,7 +15,7 @@ try {
     // ATTR_ERRMODE is a constant that represents the error reporting attribute
     // ERRMODE_EXCEPTION is a constant that represents the exception error mode
 }catch (PDOException $e){
-    die("Database connection failed: " . $e->getMessage()) // getMessage() is a method of the PDOException class that returns the error message
+    die("Database connection failed: " . $e->getMessage()); // getMessage() is a method of the PDOException class that returns the error message
     //die is used to terminate the script execution, it prints the message and exits
 }
 

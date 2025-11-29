@@ -24,8 +24,6 @@ $favorites = require __DIR__ . '/php/recipes/loadFavorites.php'; //Load favorite
         <li><a href="meal-planner.php">Meal Planner</a></li>
         <li><a href="favorites.php" class="active">Favorites</a></li>
         <li><a href="Shopping-list.php">Shopping List</a></li>
-        <li><a href="Login.php">Login</a></li>
-        <li><a href="Register.php">Register</a></li>
         <li><a href="logout.php">Logout</a></li>
       </ul>
     </nav>

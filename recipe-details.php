@@ -22,8 +22,6 @@ require_once __DIR__ . '/php/auth/checkSession.php'; // Include the session chec
 				<li><a href="meal-planner.php">Meal Planner</a></li>
 				<li><a href="favorites.php">Favorites</a></li>
 				<li><a href="Shopping-List.php">Shopping List</a></li>
-				<li><a href="Login.php">Login</a></li>
-				<li><a href="Register.php">Register</a></li>
 				<li><a href="logout.php">Logout</a></li>
 			</ul>
 		</nav>

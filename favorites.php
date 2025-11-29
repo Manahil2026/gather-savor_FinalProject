@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/php/auth/checkSession.php'; // Include the session check to make sure user is logged in.
+$favorites = require __DIR__ . '/php/recipes/loadFavorites.php'; //Load favorite recipes
 ?>
 
 <!DOCTYPE html>
@@ -36,8 +37,29 @@ require_once __DIR__ . '/php/auth/checkSession.php'; // Include the session chec
       <p>Your saved recipes will be listed here.</p>
     </section>
 
+    <!-- Favorite Recipes will be displayed here and remove button is also included -->
+
     <section id="favorites-container" class="card-grid">
-      <p class="placeholder-text">You haven't added any favorites yet.</p>
+      <?php if (empty($favorites)): ?>
+        <p class ="placeholder-text">You have no favorite recipes yet.</p>
+      
+      <?php else: ?>
+        <?php foreach ($favorites as $fav): ?>
+
+          <div class="favorite-card">
+            <img src="<?php echo $fav['recipe_image']; ?>" alt="<?php echo htmlspecialchars($fav['recipe_title']); ?>" class="favorite-img"/>
+            <h3 class="favorite-title"><?php echo htmlspecialchars($fav['recipe_title']); ?></h3>
+
+            <form action = "php/recipes/saveFavorite.php" method ="POST" class="remove-favorite-form">
+              <input type="hidden" name="recipe_id" value="<?php echo $fav['recipe_id']; ?>">
+              <button type="submit" name="action" value="remove" class="btn secondary-btn">Remove</button>
+            </form>
+
+          </div>
+
+        <?php endforeach; ?>
+
+      <?php endif; ?>
     </section>
   </main>
 </body>

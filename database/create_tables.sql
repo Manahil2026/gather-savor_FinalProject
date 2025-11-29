@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS favorites (
     recipe_title VARCHAR(255) NOT NULL,
     recipe_image VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_favorite (user_id, recipe_id), -- This will make sure that the same recipe is not duplicated in the user favorites
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE -- If a user is deleted, their favorites are also deleted
 );
 

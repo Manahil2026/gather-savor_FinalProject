@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS meal_plans(
 CREATE TABLE IF NOT EXISTS shopping_lists(
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
+    recipe_id VARCHAR(50) NOT NULL,
     ingredient VARCHAR(255) NOT NULL,
     quantity VARCHAR(100),
     added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

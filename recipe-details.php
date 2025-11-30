@@ -46,6 +46,7 @@ require_once __DIR__ . '/php/auth/checkSession.php'; // Include the session chec
 					<ul id="ingredients-list">
 						<li>Ingredient placeholder</li>
 					</ul>
+					<button id="add-to-shopping-list" class="btn secondary-btn">Add Ingredients to Shopping List</button>
 				</div>
 				<div class="instructions-column">
 					<h3>Instructions</h3>

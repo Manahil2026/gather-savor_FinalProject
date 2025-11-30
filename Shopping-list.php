@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/php/auth/checkSession.php'; // Include the session check to make sure user is logged in.
+$user_id = $_SESSION['user_id'];
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +10,7 @@ require_once __DIR__ . '/php/auth/checkSession.php'; // Include the session chec
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gather & Savor | Shopping List</title>
   <link rel="stylesheet" href="style.css">
-  <script defer src="app.js"></script>
+  <script defer src="app.js"></script> <!-- app.js will be replaced with shopping-list.js which will provoide logic for rendering ingredients from api -->
 </head>
 <body>
   <header>
@@ -29,15 +30,29 @@ require_once __DIR__ . '/php/auth/checkSession.php'; // Include the session chec
   </header>
 
   <main class="page-container">
+
     <section class="page-header">
       <h1>Shopping List</h1>
       <p>Ingredients from your selected recipes will appear here.</p>
     </section>
-    <section id="shopping-list" class="shopping-list">
-      <ul>
-        <li class="placeholder-text">Your shopping list is currently empty.</li>
-      </ul>
+
+    <section id="shopping-list" class="shopping-list-container">
+    
+      <!-- JS will replace this placeholder depending on DB results -->
+       <p class="placeholder-text" id = "empty-list-message">
+          Loading your Shopping List...
+       </p>
+
+      <!-- JS will insert recipe groups here -->
+       <div id = "shopping-list-groups"></div>
+
     </section>
+
+    <!-- Pass user_id to JS if needed -->
+    <script>
+      const USER_ID = <?= json_encode($user_id); ?>;
+    </script>
+
   </main>
 </body>
 </html>

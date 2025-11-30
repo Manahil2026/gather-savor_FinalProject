@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/php/auth/checkSession.php'; // Include the session check to make sure user is logged in.
+$meal_plan = require __DIR__ . '/php/recipes/loadMealPlan.php'; //Load meal plan data
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +10,7 @@ require_once __DIR__ . '/php/auth/checkSession.php'; // Include the session chec
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Gather & Savor | Meal Planner</title>
 	<link rel="stylesheet" href="style.css">
-	<script defer src="app.js"></script>
+	<script defer src="app.js"></script> <!-- Instead of app.js meal-planner.js will come here which will fetch the recipe titles from the API and render them --> 
 </head>
 <body>
 	<header>
@@ -35,49 +36,45 @@ require_once __DIR__ . '/php/auth/checkSession.php'; // Include the session chec
 		</section>
 
 		<section class="meal-planner-grid">
-			<div class="day-column">
-				<h2>Monday</h2>
-				<div class="day-slot" id="monday-slot">
-					<p class="placeholder-text">No recipe assigned.</p>
+			<?php 
+				$days = [
+					'monday' => 'Monday',
+					'tuesday' => 'Tuesday',
+					'wednesday' => 'Wednesday',
+					'thursday' => 'Thursday',
+					'friday' => 'Friday',
+					'saturday' => 'Saturday',
+					'sunday' => 'Sunday'
+				];
+
+				foreach($days as $key => $label): 
+					$recipeId = $meal_plan[$key] ?? null;
+			
+			?>
+
+			<div class = 'day-column'>
+				<h2><?= $label ?></h2>
+
+				<div class = "day-slot"
+					data-day="<?= $key ?>"
+					data-recipe-id="<?= $recipeId ? htmlspecialchars($recipeId) : '' ?>"
+				>
+
+					<?php if($recipeId): ?>
+						<!-- Placeholder until API loads via JS -->
+						<p class = "loading-text">Loading recipes...</p>
+					<?php else: ?>
+						<p class="placeholder-text">No recipe assigned.</p>
+					<?php endif; ?>
+
 				</div>
 			</div>
-			<div class="day-column">
-				<h2>Tuesday</h2>
-				<div class="day-slot" id="tuesday-slot">
-					<p class="placeholder-text">No recipe assigned.</p>
-				</div>
-			</div>
-			<div class="day-column">
-				<h2>Wednesday</h2>
-				<div class="day-slot" id="wednesday-slot">
-					<p class="placeholder-text">No recipe assigned.</p>
-				</div>
-			</div>
-			<div class="day-column">
-				<h2>Thursday</h2>
-				<div class="day-slot" id="thursday-slot">
-					<p class="placeholder-text">No recipe assigned.</p>
-				</div>
-			</div>
-			<div class="day-column">
-				<h2>Friday</h2>
-				<div class="day-slot" id="friday-slot">
-					<p class="placeholder-text">No recipe assigned.</p>
-				</div>
-			</div>
-			<div class="day-column">
-				<h2>Saturday</h2>
-				<div class="day-slot" id="saturday-slot">
-					<p class="placeholder-text">No recipe assigned.</p>
-				</div>
-			</div>
-			<div class="day-column">
-				<h2>Sunday</h2>
-				<div class="day-slot" id="sunday-slot">
-					<p class="placeholder-text">No recipe assigned.</p>
-				</div>
-			</div>
+
+			<?php endforeach; ?>
+
+
 		</section>
+		
 	</main>
 </body>
 </html>

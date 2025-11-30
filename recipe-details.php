@@ -55,21 +55,19 @@ require_once __DIR__ . '/php/auth/checkSession.php'; // Include the session chec
 				</div>
 			</div>
 
-			<form action="php/recipes/saveFavorite.php" method = "POST" id=favorites-form>
-				<input type="hidden" name="recipe_id" value="<?php echo htmlspecialchars($recipe['id']); ?>">
-				<input type="hidden" name="recipe_title" value="<?php echo htmlspecialchars($recipe['title']); ?>">
-				<input type="hidden" name="recipe_image" value="<?php echo htmlspecialchars($recipe['image']); ?>">
-				<button type = "submit" name = "action" value = "add" class="btn secondary-btn" id="add-to-favorites-btn">Add to Favorites</button>
+			<form action="php/recipes/saveFavorite.php" method = "POST" class=favorite-form>
+				<input type="hidden" name="recipe_id" value="<?=$recipe_id ?>">
+				<button type = "submit" name = "action" value = "add" class="btn secondary-btn">Add to Favorites</button>
 			</form>
 
-			<form action="php/recipes/saveFavorite.php" method = "POST" id=favorites-form>
-				<input type="hidden" name="recipe_id" value="<?php echo htmlspecialchars($recipe['id']); ?>">
+			<form action="php/recipes/saveFavorite.php" method = "POST" class=favorite-form>
+				<input type="hidden" name="recipe_id" value="<?=$recipe_id ?>">
 				
-				<button type = "submit" name = "action" value = "remove" class="btn secondary-btn" id="add-to-favorites-btn">Remove from Favorites</button>
+				<button type = "submit" name = "action" value = "remove" class="btn secondary-btn">Remove from Favorites</button>
 			</form>
 
-			<form action="php/recipes/addToMealPlan.php" method="POST">
-				<input type="hidden" name = "recipe_id" value="<?php echo htmlspecialchars($recipe_id); ?>">
+			<form action="php/recipes/addToMealPlan.php" method="POST" class="mealplan-form">
+				<input type="hidden" name = "recipe_id" value="<?=$recipe_id ?>">
 
 				<label> Select a day:</label>
 				<select name="day" required>
@@ -83,7 +81,7 @@ require_once __DIR__ . '/php/auth/checkSession.php'; // Include the session chec
 					<option value="sunday">Sunday</option>
 				</select> 
 				
-				<button class="btn secondary-btn" id="add-to-mealplan-btn">Add to Meal Plan</button>
+				<button class="btn secondary-btn">Add to Meal Plan</button>
 			</form>
 
 		</section>

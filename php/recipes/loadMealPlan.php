@@ -15,7 +15,7 @@ $stmt->execute([':user' => $user_id]);
 
 $meal_plan = $stmt->fetch(PDO::FETCH_ASSOC); //Fetch meal plan as an associative array
 
-return $meal_plan ?:[
+return $meal_plan ?: [
         'monday' => '',
         'tuesday' => '',
         'wednesday' => '',

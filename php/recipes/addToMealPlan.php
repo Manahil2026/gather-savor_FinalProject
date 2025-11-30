@@ -6,10 +6,10 @@ require_once __DIR__ . '/../auth/checkSession.php'; // Male sure user is logged 
 
 $user_id = $_SESSION['user_id']; //Get user id from session
 $recipe_id = $_POST['recipe_id']; // Get recipe id from the post request
-$day = $POST['day']; // Get day from the post request
+$day = $_POST['day']; // Get day from the post request
 
 // Make sure that the day sent in the post request is valid
-$validDays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday, saturday, sunday'];
+$validDays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 if (!in_array($day, $validDays)){
     die("Invalid day");
 }

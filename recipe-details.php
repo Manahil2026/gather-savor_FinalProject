@@ -68,7 +68,24 @@ require_once __DIR__ . '/php/auth/checkSession.php'; // Include the session chec
 				<button type = "submit" name = "action" value = "remove" class="btn secondary-btn" id="add-to-favorites-btn">Remove from Favorites</button>
 			</form>
 
-			<button class="btn secondary-btn" id="add-to-mealplan-btn">Add to Meal Plan</button>
+			<form action="php/recipes/addToMealPlan.php" method="POST">
+				<input type="hidden" name = "recipe_id" value="<?php echo htmlspecialchars($recipe_id); ?>">
+
+				<label> Select a day:</label>
+				<select name="day" required>
+					<option value="" disabled selected>Select day</option>
+					<option value="monday">Monday</option>
+					<option value="tuesday">Tuesday</option>
+					<option value="wednesday">Wednesday</option>
+					<option value="thursday">Thursday</option>
+					<option value="friday">Friday</option>
+					<option value="saturday">Saturday</option>
+					<option value="sunday">Sunday</option>
+				</select> 
+				
+				<button class="btn secondary-btn" id="add-to-mealplan-btn">Add to Meal Plan</button>
+			</form>
+
 		</section>
 	</main>
 </body>

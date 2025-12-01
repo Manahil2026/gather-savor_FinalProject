@@ -4,8 +4,8 @@ session_start(); // Start a new session or resume existing one
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name             = trim($_POST['name'] ?? '');
     $email            = trim($_POST['email'] ?? '');
-    $password         = $_POST['password'] ?? '');
-    $confirm_password = $_POST['confirm_password'] ?? '');
+    $password         = $_POST['password'] ?? '';
+    $confirm_password = $_POST['confirm_password'] ?? '';
 
     // Basic validation
     $errors = [];
@@ -57,8 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 
                 $stmt-> execute([$name, $email, $hash_password]);
 
-                $_SESSION['success'] = "Account created successfully! Redirecting..."
-                $_SESSION['user_id'] = $pdo->lastInsert();
+                $_SESSION['success'] = "Account created successfully! Redirecting...";
+                $_SESSION['user_id'] = $pdo->lastInsertId();
                 $_SESSION['username'] = $name;
 
                 echo "<script>
@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="logo">
                     <a href="index_splash.html">Gather &amp; Savor</a>
                 </div>
-                <ul class="new-links">
+                <ul class="nav-links">
                     <li><a href="index_splash.html">Home</a></li>
                     <li><a href="Recipes.php">Recipes</a></li>
                     <li><a href="meal-planner.php">Meal Planner</a></li>
@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <?php if (isset($_SESSION['error'])): ?>
                     <div class="alert error">
-                        <?= $_SESSION['error']; unset[$_SESSION['error']); ?>
+                        <?= $_SESSION['error']; unset($_SESSION['error']); ?>
                     </div>
                 <?php endif; ?>
 
@@ -128,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     <div class="form-group">
                         <label for="reg-email">Email Address</label>
-                        <input type="email" id="reg-name" name="email"
+                        <input type="email" id="reg-name" name="reg-email"
                             value="<?= htmlspecialchars($_POST['email'] ?? ''); ?>" required>
                     </div>
 

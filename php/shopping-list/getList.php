@@ -9,7 +9,7 @@ $user_id = $_SESSION['user_id'];
 
 $stmt = $conn->prepare("SELECT id, recipe_id, ingredient, quantity
     FROM shopping_lists WHERE user_id = ? ORDER BY recipe_id, ingredient
-")
+");
 $stmt->bind_param('i',$user_id);
 $stmt->execute();
 $result = $stmt->get_result();

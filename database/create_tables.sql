@@ -3,14 +3,14 @@ USE gather_savor;
 
 -- Users Table (Stores user information for authentication and profiles)
 CREATE TABLE IF NOT EXISTS users (
-    id INT AUTO_INCREMENT PRIMARY KEY, --Auto-increment means that this value will be generated automatically for each new record
+    id INT AUTO_INCREMENT PRIMARY KEY, -- Auto-increment means that this value will be generated automatically for each new record
     username VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
-    pssword VARCHAR(255) NOT NULL, --password is a reserved keyword in SQL, so we use pssword instead
+    pssword VARCHAR(255) NOT NULL, -- password is a reserved keyword in SQL, so we use pssword instead
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Records the time when the user was created
 );
 
---Favorites Table (Stores user favorite recipes)
+-- Favorites Table (Stores user favorite recipes)
 CREATE TABLE IF NOT EXISTS favorites (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS favorites (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE -- If a user is deleted, their favorites are also deleted
 );
 
---Meal plans tavle
+-- Meal plans tavle
 CREATE TABLE IF NOT EXISTS meal_plans(
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -33,11 +33,11 @@ CREATE TABLE IF NOT EXISTS meal_plans(
     friday VARCHAR(50),
     saturday VARCHAR(50),
     sunday VARCHAR(50),
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, --This updates the timestamp whenever the meal plan is updated
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- This updates the timestamp whenever the meal plan is updated
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
---Shopping Lists Table
+-- Shopping Lists Table
 CREATE TABLE IF NOT EXISTS shopping_lists(
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,

@@ -7,6 +7,7 @@ $username = 'root'; // root is the dafault username for XAMPP
 $password = ''; // I will leave this empty because XAMPP's default psswrd is empty
 $dsn = "mysql:host=localhost;dbname=$dbname";
 
+
 try {
     $conn = new PDO($dsn, $username, $password);
 

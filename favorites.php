@@ -62,3 +62,6 @@ $favorites = require __DIR__ . '/php/recipes/loadFavorites.php'; //Load favorite
   </main>
 </body>
 </html>
+
+
+

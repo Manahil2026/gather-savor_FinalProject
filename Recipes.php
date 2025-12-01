@@ -46,9 +46,11 @@ require_once __DIR__ . '/php/auth/checkSession.php'; // Include the session chec
 			</form>
 		</section>
 
+		<!-- Populate-->
 		<section id="recipe-results" class="card-grid">
 			<p class="placeholder-text">Search for a recipe to see results here.</p>
 		</section>
 	</main>
+	<script src="js/recipes.js"></script>
 </body>
 </html>

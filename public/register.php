@@ -1,6 +1,7 @@
 <?php
-  session_start(); // Start a new session or resume existing one
-  require_once __DIR__ . "/../src/auth/handleLogin.php";
+session_start(); // Start a new session or resume existing one
+
+require_once __DIR__ . "/../src/auth/handleRegister.php";
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +9,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gather & Savor | Login</title>
+  <title>Gather & Savor | Register</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -23,15 +24,15 @@
         <li><a href="meal-planner.php">Meal Planner</a></li>
         <li><a href="favorites.php">Favorites</a></li>
         <li><a href="Shopping-list.php">Shopping List</a></li>
-        <li><a href="Login.php" class="active">Login</a></li>
-        <li><a href="Register.php">Register</a></li>
+        <li><a href="Login.php">Login</a></li>
+        <li><a href="Register.php" class="active">Register</a></li>
       </ul>
     </nav>
   </header>
 
-  <main class="page-container auth page">
+  <main class="page-container auth-page">
     <section class="auth-card">
-      <h1>Login</h1>
+      <h1>Create an Account</h1>
 
       <?php if (isset($_SESSION['error'])): ?> <!-- If there is an error message in the session, display it -->
         <div class="alert error">
@@ -46,20 +47,32 @@
       <?php endif; ?>
 
 
-      <form id="login-form" method="post" action="Login.php">
+      <form id="register-form" method="post" action="Register.php">
         <div class="form-group">
-          <label for="login-email">Email</label>
-          <input type="email" id="login-email" name="email" required>
+          <label for="reg-name">Name</label>
+          <input type="text" id="reg-name" name="name" required>
         </div>
 
         <div class="form-group">
-          <label for="login-password">Password</label>
-          <input type="password" id="login-password" name="password" required>
+          <label for="reg-email">Email</label>
+          <input type="email" id="reg-email" name="email" required>
         </div>
 
-        <button type="submit" class="btn primary-btn">Log In</button>
+        <div class="form-group">
+          <label for="reg-password">Password</label>
+          <input type="password" id="reg-password" name="password" required>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-confirm">Confirm Password</label>
+          <input type="password" id="reg-confirm" name="confirm_password" required>
+        </div>
+
+        <button type="submit" class="btn primary-btn">Register</button>
       </form>
-      <p class="auth-switch">Don't have an account?<a href="Register.php">Register here.</a></p>
+      <p class="auth-switch">
+        Already have an account? <a href="Login.php">Log in here.</a>
+      </p>
     </section>
   </main>
 </body>

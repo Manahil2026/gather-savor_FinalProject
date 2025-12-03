@@ -14,7 +14,7 @@ session_start(); // Start anew session or resume existing one
 
 // If session does not have user id redirect to login page
 if(!isset($_SESSION['user_id'])){
-    header('Location: Login.php');
+    header('Location: login.php');
     exit;
 }
 

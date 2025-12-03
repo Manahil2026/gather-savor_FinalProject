@@ -10,7 +10,7 @@
 	<main class="splash-container">
 		<h1>Welcome to Gather & Savor</h1>
 		<p>Your personal recipe finder and weekly meal planner.</p>
-		<a class="btn primary-btn" href="Home.php">Enter site</a>
+		<a class="btn primary-btn" href="home.php">Enter site</a>
 	</main>
 </body>
 </html>

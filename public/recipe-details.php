@@ -1,8 +1,35 @@
 <?php
-require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session check to make sure user is logged in.
-//Post to get the current recipe. post with the link.
+	session_start();
+	require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session check to make sure user is logged in.
 
+	
+		if($_SERVER['REQUEST_METHOD'] == 'POST'){
+			if(!isset($_POST['action'])){
+				//die
+			};
+
+			$action = $_POST['action'];
+
+			switch($action){
+				case "save-favorite":
+					require_once __DIR__ . "/../src/recipes/saveFavorite.php";
+					break;
+				
+				case "remove-favorite":
+					require_once __DIR__ . "/../src/recipes/removeFavorite.php";
+					break;
+
+				case "add-mealPlan":
+					require_once __DIR__ . "/../src/recipes/addToMealPlan.php";
+					break;
+
+				default:
+					//not a valid request. Die
+					break;
+			}
+		}
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,18 +85,18 @@ require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session c
 				</div>
 			</div>
 
-			<form action="php/recipes/saveFavorite.php" method = "POST" class=favorite-form>
+			<form action="recipe-details.php" method = "POST" class=favorite-form>
 				<input type="hidden" name="recipe_id" value="<?=$recipe_id ?>">
 				<button type = "submit" name = "action" value = "add" class="btn secondary-btn">Add to Favorites</button>
 			</form>
 
-			<form action="php/recipes/saveFavorite.php" method = "POST" class=favorite-form>
+			<form action="recipe-details.php" method = "POST" class=favorite-form>
 				<input type="hidden" name="recipe_id" value="<?=$recipe_id ?>">
 				
 				<button type = "submit" name = "action" value = "remove" class="btn secondary-btn">Remove from Favorites</button>
 			</form>
 
-			<form action="php/recipes/addToMealPlan.php" method="POST" class="mealplan-form">
+			<form action="recipe-details.php" method="POST" class="mealplan-form">
 				<input type="hidden" name = "recipe_id" value="<?=$recipe_id ?>">
 
 				<label> Select a day:</label>

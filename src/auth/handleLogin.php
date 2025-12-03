@@ -21,7 +21,7 @@ function handleAuth(){
     $password = isset($_POST['password']) ? trim($_POST['password']) : ''; // If password is set in POST request trim whitespace and assign to $password, else assign empty string
 
     if(empty($email) || empty($password)){ // Check if email or password is empty
-        redirect_with_msg('../../Login.php', 'error', 'Please fill in all fields.'); // Redirect to login page if any field empty
+        redirect_with_msg('login.php', 'error', 'Please fill in all fields.'); // Redirect to login page if any field empty
     }
 
     try{
@@ -30,22 +30,22 @@ function handleAuth(){
         $user = $stmt->fetch(PDO::FETCH_ASSOC); //Fetch the user record as an associative array
 
         if(!$user){ // If no user record is found
-            redirect_with_msg('../../Login.php', 'error', 'Email not found.'); // Redirect to login page with error message
+            redirect_with_msg('login.php', 'error', 'Email not found.'); // Redirect to login page with error message
         }
 
         //password_verify is a built-in PHP function that verifies that a given password matches a hashed password
         if(!password_verify($password, $user['pssword'])){ //Verify the provided password against the hashed password stored in the database
-            redirect_with_msg('../../Login.php', 'error', 'Incorrect password.'); //Redirect to login page if password is incorrect
+            redirect_with_msg('login.php', 'error', 'Incorrect password.'); //Redirect to login page if password is incorrect
         }
 
         // If login is successful, store user info in session
         $_SESSION['user_id'] = $user['id']; // Store user id in session to log the user in
         $_SESSION['username'] = $user['username']; // Store username in session
 
-        redirect_with_msg('../../Home.php', 'success', 'Logged in successfully.'); // Redirect to homepage with success message
+        redirect_with_msg('home.php', 'success', 'Logged in successfully.'); // Redirect to homepage with success message
 
     } catch (PDOException $e){
-        redirect_with_msg('../../Login.php', 'error', 'Server error: ' . $e->getMessage()); //If a database error occurs redirect to login page with error message
+        redirect_with_msg('login.php', 'error', 'Server error: ' . $e->getMessage()); //If a database error occurs redirect to login page with error message
     }    
 }
 

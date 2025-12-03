@@ -10,6 +10,8 @@
 //user clicks on it and it works
 //Make request to add it to database, reload the page and it will be loaded in from above
 
+//ALTERNATIVELY just leave it on the recipe details page. For the sake of simplicity leave it to that for now
+
 
 //removing one:
 //delete button right next to it.

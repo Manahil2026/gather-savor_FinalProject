@@ -5,7 +5,7 @@
 	
 		if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			if(!isset($_POST['action'])){
-				//die
+				$error = "Invalid request";
 			};
 
 			$action = $_POST['action'];
@@ -24,9 +24,14 @@
 					break;
 
 				default:
-					//not a valid request. Die
+					$error = "Invalid request";
 					break;
 			}
+		};
+
+		if(isset($_SESSION['error'])){
+			$error = $_SESSION['error'];
+			unset($_SESSION['error']);
 		}
 ?>
 
@@ -35,6 +40,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--Display errors-->
+	<?=$error?>
 	<title>Gather & Savor | Recipe Details</title>
 	<link rel="stylesheet" href="style.css">
 	<script defer src="app.js"></script>
@@ -91,13 +98,14 @@
 			</form>
 
 			<form action="recipe-details.php" method = "POST" class=favorite-form>
-				<input type="hidden" name="recipe_id" value="<?=$recipe_id ?>">
 				
 				<button type = "submit" name = "action" value = "remove" class="btn secondary-btn">Remove from Favorites</button>
 			</form>
 
 			<form action="recipe-details.php" method="POST" class="mealplan-form">
-				<input type="hidden" name = "recipe_id" value="<?=$recipe_id ?>">
+				<!--<input type="hidden" name = "recipe_id" value="<?php //$recipe_id ?>"> -->
+				<input type="hidden" name="action" value="add-mealPlan">
+				<input type="hidden" name="recipe_id" value="901234'33'f"> <!--In the future this will just be the link to the item on the api-->
 
 				<label> Select a day:</label>
 				<select name="day" required>
@@ -111,7 +119,7 @@
 					<option value="sunday">Sunday</option>
 				</select> 
 				
-				<button class="btn secondary-btn">Add to Meal Plan</button>
+				<button type="submit" class="btn secondary-btn">Add to Meal Plan</button>
 			</form>
 
 		</section>

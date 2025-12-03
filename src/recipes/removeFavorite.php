@@ -2,6 +2,7 @@
 //session and the check auth is already done in the recipe-details page
 
 function removeFavorite(){
+    //todo: add error handling
     require_once __DIR__ . '/../db.php'; // Include db connection file
     require_once __DIR__ . '/../auth/checkSession.php'; // Ensure user is logged in
 

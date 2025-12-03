@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/php/auth/checkSession.php'; // Include the session check to make sure user is logged in.
-$meal_plan = require __DIR__ . '/php/recipes/loadMealPlan.php'; //Load meal plan data
+require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session check to make sure user is logged in.
+$meal_plan = require __DIR__ . '/../src/recipes/loadMealPlan.php'; //Load meal plan data
 ?>
 
 <!DOCTYPE html>

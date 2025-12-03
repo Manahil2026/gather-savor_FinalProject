@@ -1,5 +1,7 @@
 <?php
-require_once __DIR__ . '/php/auth/checkSession.php'; // Include the session check to make sure user is logged in.
+require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session check to make sure user is logged in.
+//Post to get the current recipe. post with the link.
+
 ?>
 <!DOCTYPE html>
 <html>

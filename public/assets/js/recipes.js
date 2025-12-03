@@ -1,4 +1,6 @@
 //Get a bunch of recipes from the api
+//Make request to some endpoint. I'll call it api?
+
 
 //Parse the results
 

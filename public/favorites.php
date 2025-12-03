@@ -1,6 +1,8 @@
 <?php
-require_once __DIR__ . '/php/auth/checkSession.php'; // Include the session check to make sure user is logged in.
-$favorites = require __DIR__ . '/php/recipes/loadFavorites.php'; //Load favorite recipes
+require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session check to make sure user is logged in.
+$favorites = require __DIR__ . '/../src/recipes/loadFavorites.php'; //Load favorite recipes
+
+
 ?>
 
 <!DOCTYPE html>

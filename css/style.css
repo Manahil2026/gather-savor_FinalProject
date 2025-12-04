@@ -1,0 +1,212 @@
+/* === Global reset / base === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Times New Roman", sans-serif;
+  background: #f7f5f2;
+  color: #222;
+}
+
+/* === Header & nav (can be moved to header .css if you prefer) === */
+header {
+  backgrounf: #222;
+  color: #fff;
+}
+
+.main-nav {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: #ddd;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+  color: #fff;
+  border-bottom: 2px solid #ff7e3d;
+}
+
+/* === Shared layout === */
+.page-container {
+  max-width: 1100px;
+  margin: 1.5rem auto 3rem;
+  padding: 0 1rem;
+}
+
+.page-header h1 {
+  margin: 0 0 0.25rem;
+}
+
+.page-header p {
+  margin: 0;
+  color: #555;
+}
+
+/* === Buttons === */
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.55rem 1.2rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.primary-btn {
+  background: #ff7e3d;
+  color: #fff;
+}
+
+.primary-btn:hover {
+  background: #ff945f;
+}
+
+.secondary-btn {
+  background: #fff;
+  color: #ff7e3d;
+  border: 1px solid #ff7e3d;
+}
+
+secondary-btn:hover {
+  background: #ff7e3d;
+  color: #fff;
+}
+
+/* === Splash / index page === */
+.splash-container {
+  min-height: 100vh;
+  display: flex;
+  flex-decoration: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 1.5rem;
+}
+
+.splash-container h1 {
+  margin-bottom: 0.5rem;
+  font-size: 2.1rem;
+}
+
+.splash-container p {
+  margin: 0 0 1.4rem;
+  color: #555;
+  max-width: 420px;
+}
+
+/* === Card grids (recipes list, etc.) === */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px 1fr));
+  gap: 1.5rem;
+}
+
+.placeholder-text {
+  grid-column: 1 / -1;
+  color: #777;
+  font-style: italic;
+}
+
+/* === Search section (recipes page) === */
+.search-section {
+  margin: 1.5rem 0;
+}
+
+#recipe-search-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+#recipe-search-form input,
+#recipe-search-form select {
+  padding: 0.55rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+}
+
+#search-query {
+  flex: 1 1 220px;
+}
+
+#search-filter {
+  flex: 0 0 180px;
+}
+
+/* === Recipe details shared bits === */
+.recipe-details {
+  margin-top: 1.5rem;
+}
+
+.recipe-main {
+  margin-bottom: 1.5rem;
+}
+
+.recipe-image {
+  width: 100%;
+  max-height: 380px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-top: 0.75rem;
+}
+
+.recipe-summary {
+  margin-top: 0.75rem;
+  color: #555;
+}
+
+.recipe-columns {
+  display: grid;
+  grid-template-columns: 1.1fr 1.3fr;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-top: 1.5rem;
+}
+
+/* Forms under recipe */
+.favorite-form,
+.mealplan-form {
+  margin-top: 1rem;
+}
+
+/* === Responsive tweaks === */
+@media (max-width: 768px) {
+  .main-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+.recipe-columns {
+  grid-template-columns: 1fr;
+}
+}

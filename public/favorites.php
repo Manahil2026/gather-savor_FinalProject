@@ -21,11 +21,11 @@ $favorites = require __DIR__ . '/../src/recipes/loadFavorites.php'; //Load favor
         <a href="Home.php">Gather & Savor</a>
       </div>
       <ul class="nav-links">
-        <li><a href="Home.php">Home</a></li>
-        <li><a href="Recipes.php">Recipes</a></li>
+        <li><a href="home.php">Home</a></li>
+        <li><a href="recipes.php">Recipes</a></li>
         <li><a href="meal-planner.php">Meal Planner</a></li>
         <li><a href="favorites.php" class="active">Favorites</a></li>
-        <li><a href="Shopping-list.php">Shopping List</a></li>
+        <li><a href="shopping-list.php">Shopping List</a></li>
         <li><a href="logout.php">Logout</a></li>
       </ul>
     </nav>

@@ -19,11 +19,11 @@ $meal_plan = require __DIR__ . '/../src/recipes/loadMealPlan.php'; //Load meal p
 				<a href="Home.php">Gather & Savor</a>
 			</div>
 			<ul class="nav-links">
-				<li><a href="Home.php">Home</a></li>
-				<li><a href="Recipes.php">Recipes</a></li>
+				<li><a href="home.php">Home</a></li>
+				<li><a href="recipes.php">Recipes</a></li>
 				<li><a href="meal-planner.php" class="active">Meal Planner</a></li>
 				<li><a href="favorites.php">Favorites</a></li>
-				<li><a href="Shopping-list.php">Shopping List</a></li>
+				<li><a href="shopping-list.php">Shopping List</a></li>
 				<li><a href="logout.php">Logout</a></li>
 			</ul>
 		</nav>

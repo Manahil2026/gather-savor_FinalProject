@@ -22,11 +22,11 @@ require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session c
 				<a href="Home.php">Gather & Savor</a>
 			</div>
 			<ul class="nav-links">
-				<li><a href="Home.php">Home</a></li>
-				<li><a href="Recipes.php" class="active">Recipes</a></li>
+				<li><a href="home.php">Home</a></li>
+				<li><a href="recipes.php" class="active">Recipes</a></li>
 				<li><a href="meal-planner.php">Meal Planner</a></li>
 				<li><a href="favorites.php">Favorites</a></li>
-				<li><a href="Shopping-List.php">Shopping List</a></li>
+				<li><a href="shopping-List.php">Shopping List</a></li>
 				<li><a href="logout.php">Logout</a></li>
 			</ul>
 		</nav>

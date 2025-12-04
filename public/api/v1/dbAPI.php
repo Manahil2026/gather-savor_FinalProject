@@ -1,6 +1,6 @@
 <?php
-
-    require_once __DIR__ . "/../../../src/db.php";
+    require_once __DIR__ . "/../../../src/db.php"; //defines $conn
+ 
 
     //This file sends requests to the database so that I can get things like favorites etc. and it returns json data.
     //Need the table in the request, and the id, if the id is null it will return everything
@@ -15,16 +15,19 @@
             ]);
         exit;
     }
+    
+    $raw = file_get_contents("php://input");
+    $req = json_decode($raw, true);
 
-    $user_id = $_SESSION['user_id'];
-    function saveToDatabase($table, $values){
+    function saveToDatabase($table, $values, $conn){
+        //todo: for each case check to make sure that none of the values being added are null. error if null.
 
         $res = "";
         switch($table){
             case "favorites":
                     $stmt = $conn->prepare("insert into favorites_updated (user_id, link) values (:user_id, :link)");
                     $stmt->execute([
-                        'user_id' => $user_id,
+                        'user_id' => $_SESSION['user_id'],
                         'link' => $values['link']
             
                     ]); 
@@ -121,7 +124,7 @@
     }
 
 
-    function removeFromDatabase($table, $id){
+    function removeFromDatabase($table, $id, $conn){
         $res = "";
         if($id === ""){
             $res = json_encode([
@@ -129,9 +132,20 @@
                 "message" => "Invalid request"
             ]);
             echo $res;
-            return;
+            die();
         }
            
+
+        $validTables = array("favorites_updated","shopping_lists,meal_plans_updated");
+        if(!in_array($table, $validTables)){
+            $res = json_encode([
+                "status" => "error",
+                "message" => "Invalid request"
+            ]);
+            echo $res;
+            die();
+        }
+
         $stmt = $conn->prepare("delete from :table where id=:id");
         $stmt->execute([
             "table" => $table,
@@ -147,7 +161,7 @@
 
     }
 
-    function getFromDatabase($table, $id){
+    function getFromDatabase($table, $id, $conn){
         $res = "";
         if($id === ""){
             $res = json_encode([
@@ -155,60 +169,69 @@
                 "message" => "Invalid request"
             ]);
             echo $res;
-            return;
+            die();
         }
 
-        $stmt = $conn->prepare("select * from :table where id=:id");
-        $stmt->execute([
-            "table" => $table,
-            "id" => $id
-        ]);
 
-        $res = json_encode([
-            "status" => "success",
-            "message" => "successfully deleted"
-        ]);
-
-        echo $res;
-    }
-
-    function processRequest(){
-
-        if(!isset($_POST['data'])){
+        $validTables = array("favorites_updated","shopping_lists,meal_plans_updated");
+        if(!in_array($table, $validTables)){
             $res = json_encode([
                 "status" => "error",
                 "message" => "Invalid request"
             ]);
             echo $res;
-            return;
+            die();
         }
-        $data = json_decode($_POST('data'));
 
+        $stmt = $conn->prepare("select * from $table where id=:id");
+        $stmt->execute(["id" => $id]);
+        
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        $res = json_encode([
+            "status" => "success",
+            "message" => json_encode($data),
+        ]);
 
-        $id = $data['id'];
-        $action = $data['action'];
-        $table = $data['table'];
+        
+        echo $res;
+    }
 
-        $values = $_POST('values');
+    function processRequest($req, $conn){
+        if(!$req['data']){
+            $res = json_encode([
+                "status" => "error",
+                "message" => "Invalid requests"
+            ]);
+            echo $res;
+            die();
+        }
+
+        
+        
+        $id = $req['data']['id'];
+        $action = $req['data']['action'];
+        $table = $req['data']['table'];
+
+        $values = $req['data']['values'];
         
         try{
             switch($action){
             case "add":
-                saveToDatabase($table, $values);
+                saveToDatabase($table, $values, $conn);
             break;
 
             case "delete":
-                removeFromDatabase($table,$id);
+                removeFromDatabase($table,$id, $conn);
                 break;
 
             case "fetch":
-                getFromDatabase($table, $id);
+                getFromDatabase($table, $id, $conn);
                 break;
 
             default:
                 $res = json_encode([
                     "status" => "error",
-                    "message" => "Invalid request"
+                    "message" => "Invalid requestadsf"
                 ]);
                 echo $res;
                 break;
@@ -227,7 +250,7 @@
     }
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        processRequest();
+        processRequest($req, $conn);
     }
     else{
         $res = json_encode([

@@ -13,7 +13,9 @@ function removeFavorite(){
     $image = $_POST['recipe_image'] ?? '';
     $stmt = $conn->prepare("DELETE FROM favorites WHERE user_id = :user AND recipe_id = :rid LIMIT 1");
     $stmt->execute([':user' => $user_id, ':rid' => $recipe_id]);
-    header('Location: ../../[public/favorites.php?msg=Recipe removed from favorites'); //Redirect to favprites page with msg
+    
+    //Change to $_SESSION success message for consistency
+    header('Location: favorites.php?msg=Recipe removed from favorites'); //Redirect to favprites page with msg
     exit;
 }
 

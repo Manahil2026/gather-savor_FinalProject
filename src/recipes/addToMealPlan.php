@@ -48,6 +48,11 @@ function addMealPlan(){
 
         //Redirect back to meal planner page
         header("Location: recipe-details.php");
+        
+        //add success message
+
+
+        //todo: instead of just changing the page send back json responses for a true api backend.
 
 
     }catch(PDOException $e){

@@ -19,13 +19,13 @@ require_once __DIR__ . "/../src/auth/handleRegister.php";
         <a href="Home.php">Gather & Savor</a>
       </div>
       <ul class="nav-links">
-        <li><a href="Home.php">Home</a></li>
-        <li><a href="Recipes.php">Recipes</a></li>
+        <li><a href="home.php">Home</a></li>
+        <li><a href="recipes.php">Recipes</a></li>
         <li><a href="meal-planner.php">Meal Planner</a></li>
         <li><a href="favorites.php">Favorites</a></li>
-        <li><a href="Shopping-list.php">Shopping List</a></li>
-        <li><a href="Login.php">Login</a></li>
-        <li><a href="Register.php" class="active">Register</a></li>
+        <li><a href="shopping-list.php">Shopping List</a></li>
+        <li><a href="login.php">Login</a></li>
+        <li><a href="register.php" class="active">Register</a></li>
       </ul>
     </nav>
   </header>

@@ -14,7 +14,7 @@ body {
 
 /* === Header & nav (can be moved to header .css if you prefer) === */
 header {
-  backgrounf: #222;
+  background: #222;
   color: #fff;
 }
 

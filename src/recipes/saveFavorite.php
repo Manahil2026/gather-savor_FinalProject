@@ -16,12 +16,15 @@ function addFavorite(){
     $stmt = $conn->prepare("SELECT id FROM favorites WHERE user_id = :user AND recipe_id = :rid LIMIT 1");
     $stmt->execute(['user' => $user_id, 'rid' => $recipe_id]);
 
+
+    //Change to $_session error for consistency.
     if ($stmt->fetch()){ //If a record is found
         header('Location: ../../favorites.php?msg=Recipe already in favorites'); // Redirect to favorites wth msg
         exit;
     }
 
-    //Otherwise insert the recipe in favorites table
+    //Otherwise insert the recipe in favorites 
+    //I think the schema should just return the link so the client can make a request to the link and get the details that way
     $stmt = $conn->prepare("INSERT INTO favorites (user_id, recipe_id, recipe_title, recipe_image) VALUES (:user, :rid, :title, :img");
     $stmt->execute([':user' => $user_id, ':rid' => $recipe_id, ':title' => $title, ':img' => $image]);
     header('Location: ../../favorites.php?msg=Recipe added to favorites'); // Redirect to favorites with msg

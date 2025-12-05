@@ -1,262 +1,61 @@
 <?php
-    require_once __DIR__ . "/../../../src/db.php"; //defines $conn
- 
-
-    //This file sends requests to the database so that I can get things like favorites etc. and it returns json data.
-    //Need the table in the request, and the id, if the id is null it will return everything
-
-
-    // If session does not have user id reject
-    session_start(); // Start anew session or resume existing one
-    if(!isset($_SESSION['user_id'])){
-        echo json_encode([
+    require_once __DIR__ . "/../../../src/db.php"; 
+    
+    //Helper
+    function error_msg($msg){
+        echo [
             "status" => "error",
-            "message" => "unauthenticated",
-            ]);
-        exit;
+            "message "=> $msg
+        ];
+        die();
+    }
+
+
+    //Protect this route
+    session_start();
+    if(!isset($_SESSION['user_id'])){
+      error_msg("unauthenticated");
     }
     
-    $raw = file_get_contents("php://input");
-    $req = json_decode($raw, true);
 
-    function saveToDatabase($table, $values, $conn){
-        //todo: for each case check to make sure that none of the values being added are null. error if null.
+    //When a post request is sent here we get the $action and as per the $action send off to the controllers on the backend
+    function processRequest(){
 
-        $res = "";
-        switch($table){
-            case "favorites":
-                    $stmt = $conn->prepare("insert into favorites_updated (user_id, link) values (:user_id, :link)");
-                    $stmt->execute([
-                        'user_id' => $_SESSION['user_id'],
-                        'link' => $values['link']
+        //This is mainly for these two because it's easier for javascript to parse it thru here. Don't need anything complex.
+        //loadFavorites
+        //loadMealPlan
+
+
+        //Excluding these backend features:
+        //addToMealPlan <--- users makes post to recipe-details.php
+        //removeFavorite <--- users makes post to recipe-details.php
+        //saveFavorite <--- users make post to recipe-details.php
+
+
+        switch($action){
+        case "favorites":
+            include __DIR__ . "/../../../src/recipes/loadFavorites.php";
             
-                    ]); 
-                    $res = json_encode([
-                        "status" => "success",
-                        "message" => "Successfully added favorite"
-                    ]);
-                break;
-
-            case "meal-plan":
-                $day = $values['day'];
-                $link = $values['link'];  
-
-                if($day === "" || $link === ""){
-                    $res = json_encode([
-                        "status" => "error",
-                        "message" => "Invalid request"
-                    ]);
-                    break;
-                }
-
-                    $stmt = $conn->prepare("insert into meal_plans_updated (user_id, day, link) values (:user_id, :day :link)");
-                    $stmt->execute([
-                        'user_id' => $user_id,
-                        'day' => $values['day'],
-                        'link' => $values['link']
-                    ]); 
-                    
-                    $res = json_encode([
-                        "status" => "success",
-                        "message" => "Successfully added to meal plan"
-                    ]);
-                break;
-
-            case "shopping-list":
-                //values needed
-
-                $link = $values['link'];
-                $ingredient = $values['ingredient'];
-                $quantity = $values['quantity'];
-
-
-                //if values not set
-                if($link === "" || $ingredient === "" || $quantity === ""){
-                    $res = json_encode([
-                        "status" => "error",
-                        "message" => "Insufficient values"
-                    ]);
-                    break;
-                }
-
-                //Check if the ingredient is already there
-                $stmt = $conn->prepare("select * from shopping_lists where ingredient = :ingredient");
-                $stmt->execute([
-                    'ingredient' => $values['ingredient']
-                ]);
-                $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-
-                //If it is add to the quantity, no need to create a new one
-                if($row){
-                    $oldQuantity = $row['quantity'];
-                    $newQuantity = $oldQuantity + $quantity;
-
-                    $stmt = $conn->prepare("update shopping_lists set quantity = :newQuantity");
-                    $stmt->execute([
-                        "newQuantity" => $newQuantity
-                    ]);
-                }
-                else{
-                    $stmt = $conn->prepare("insert into shopping_lists (link, ingredient, quantity) values (:link, :ingredient, :quantity");
-                    $stmt->execute([
-                        "link" => $link,
-                        "ingredient" => $ingredient,
-                        "quantity" => $quantity
-                    ]);
-                }
-                $res = json_encode([
-                    "status" => "success",
-                    "message" => "The ingredient was added successfully"
-                ]);
-                break;
-
-            default:
-                $res = json_encode([
-                    "status" => "error",
-                    "message" => "Invalid request"
-                ]);
-
-                break;
-        }
-
-        echo $res;
-    }
-
-
-    function removeFromDatabase($table, $id, $conn){
-        $res = "";
-        if($id === ""){
-            $res = json_encode([
-                "status" => "error",
-                "message" => "Invalid request"
-            ]);
-            echo $res;
-            die();
-        }
-           
-
-        $validTables = array("favorites_updated","shopping_lists,meal_plans_updated");
-        if(!in_array($table, $validTables)){
-            $res = json_encode([
-                "status" => "error",
-                "message" => "Invalid request"
-            ]);
-            echo $res;
-            die();
-        }
-
-        $stmt = $conn->prepare("delete from :table where id=:id");
-        $stmt->execute([
-            "table" => $table,
-            "id" => $id
-        ]);
-
-        $res = json_encode([
-            "status" => "success",
-            "message" => "successfully deleted"
-        ]);
-
-        echo $res;
-
-    }
-
-    function getFromDatabase($table, $id, $conn){
-        $res = "";
-        if($id === ""){
-            $res = json_encode([
-                "status" => "error",
-                "message" => "Invalid request"
-            ]);
-            echo $res;
-            die();
-        }
-
-
-        $validTables = array("favorites_updated","shopping_lists,meal_plans_updated");
-        if(!in_array($table, $validTables)){
-            $res = json_encode([
-                "status" => "error",
-                "message" => "Invalid request"
-            ]);
-            echo $res;
-            die();
-        }
-
-        $stmt = $conn->prepare("select * from $table where id=:id");
-        $stmt->execute(["id" => $id]);
-        
-        $data = $stmt->fetch(PDO::FETCH_ASSOC);
-        $res = json_encode([
-            "status" => "success",
-            "message" => json_encode($data),
-        ]);
-
-        
-        echo $res;
-    }
-
-    function processRequest($req, $conn){
-        if(!$req['data']){
-            $res = json_encode([
-                "status" => "error",
-                "message" => "Invalid requests"
-            ]);
-            echo $res;
-            die();
-        }
-
-        
-        
-        $id = $req['data']['id'];
-        $action = $req['data']['action'];
-        $table = $req['data']['table'];
-
-        $values = $req['data']['values'];
-        
-        try{
-            switch($action){
-            case "add":
-                saveToDatabase($table, $values, $conn);
+            break;
+        case "meal-plan":
+            include __DIR__ . "/../../../src/recipes/loadMealPlan.php";
+            
             break;
 
-            case "delete":
-                removeFromDatabase($table,$id, $conn);
-                break;
-
-            case "fetch":
-                getFromDatabase($table, $id, $conn);
-                break;
-
-            default:
-                $res = json_encode([
-                    "status" => "error",
-                    "message" => "Invalid requestadsf"
-                ]);
-                echo $res;
-                break;
-            }
-
+        case "ingredients":
+            include __DIR__ . "/../../../src/shopping-list/getList.php";
+            
+            break;
+        default:
+            error_msg("Invalid parameters");
+            break;
         }
-        catch (PDOException $e){
-            $res = json_encode([
-                "status" => "error",
-                "message" => $e
-            ]);
-            echo $res;
-        }
-
-        
     }
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        processRequest($req, $conn);
+    if($_SERVER['REQUEST_METHOD'] === "POST"){
+        processRequest();
+    }else{
+        err_msg("Unsupported Method GET");
     }
-    else{
-        $res = json_encode([
-                "status" => "error",
-                "message" => "Invalid request"
-            ]);
-            echo $res;
-    }
+
 ?>

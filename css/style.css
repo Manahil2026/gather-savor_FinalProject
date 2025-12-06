@@ -12,9 +12,8 @@ body {
   color: #222;
 }
 
-/* === Header & nav (can be moved to header .css if you prefer) === */
 header {
-  backgrounf: #222;
+  background: #222;
   color: #fff;
 }
 
@@ -54,7 +53,6 @@ header {
   border-bottom: 2px solid #ff7e3d;
 }
 
-/* === Shared layout === */
 .page-container {
   max-width: 1100px;
   margin: 1.5rem auto 3rem;
@@ -70,7 +68,6 @@ header {
   color: #555;
 }
 
-/* === Buttons === */
 .btn {
   border: none;
   border-radius: 999px;
@@ -95,16 +92,15 @@ header {
   border: 1px solid #ff7e3d;
 }
 
-secondary-btn:hover {
+.secondary-btn:hover {
   background: #ff7e3d;
   color: #fff;
 }
 
-/* === Splash / index page === */
 .splash-container {
   min-height: 100vh;
   display: flex;
-  flex-decoration: column;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -122,10 +118,9 @@ secondary-btn:hover {
   max-width: 420px;
 }
 
-/* === Card grids (recipes list, etc.) === */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.5rem;
 }
 
@@ -135,7 +130,6 @@ secondary-btn:hover {
   font-style: italic;
 }
 
-/* === Search section (recipes page) === */
 .search-section {
   margin: 1.5rem 0;
 }
@@ -162,7 +156,6 @@ secondary-btn:hover {
   flex: 0 0 180px;
 }
 
-/* === Recipe details shared bits === */
 .recipe-details {
   margin-top: 1.5rem;
 }
@@ -192,13 +185,11 @@ secondary-btn:hover {
   margin-top: 1.5rem;
 }
 
-/* Forms under recipe */
 .favorite-form,
 .mealplan-form {
   margin-top: 1rem;
 }
 
-/* === Responsive tweaks === */
 @media (max-width: 768px) {
   .main-nav {
     flex-direction: column;
@@ -206,7 +197,7 @@ secondary-btn:hover {
     gap: 0.5rem;
   }
 
-.recipe-columns {
-  grid-template-columns: 1fr;
-}
+  .recipe-columns {
+    grid-template-columns: 1fr;
+  }
 }

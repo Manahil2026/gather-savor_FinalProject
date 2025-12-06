@@ -1,5 +1,5 @@
 .page-container {
-  max-width: 1100px
+  max-width: 1100px;
   margin: 1.5rem auto 3rem;
   padding: 0 1rem;
 }
@@ -16,7 +16,7 @@
 .meal-planner-grid {
   margin-top: 1.5rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.25rem;
 }
 
@@ -26,7 +26,7 @@
   padding: 0.9rem 1rem 1.1rem;
   box-shadow: 0 2px 6px rgba(0,0,0,0.06);
   display: flex;
-  felx-direction: column;
+  flex-direction: column;
 }
 
 .day-column h2 {
@@ -46,9 +46,9 @@
 }
 
 .placeholder-text,
-loading-text {
+.loading-text {
   margin: 0;
-  fontsize: 0.9rem;
+  font-size: 0.9rem;
   color: #777;
 }
 
@@ -64,7 +64,8 @@ loading-text {
 }
 
 @media (max-width: 600px) {
-  .meal-plan-grid {
+  .meal-planner-grid {
     grid-template-columns: 1fr;
   }
 }
+

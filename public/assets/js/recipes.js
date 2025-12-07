@@ -18,5 +18,5 @@ foods.forEach(food => {
 
 function getRecipeDetails(event){
     const id = event.target.closest("div").id;
-    window.location.href = `http://localhost/recipe-details.php?id=${id}`;
+    window.location.href = `http://localhost/recipe-details.php?recipe_id=${id}`;
 }

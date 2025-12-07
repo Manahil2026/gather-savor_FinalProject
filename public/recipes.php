@@ -1,4 +1,6 @@
 <?php
+
+//by Ant
 require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session check to make sure user is logged in.
 
 //https://stackoverflow.com/questions/9802788/call-a-rest-api-in-php

@@ -1,39 +1,41 @@
 <?php
 
+	if($_SESSION['error']){
+		$error = $_SESSION['error'];
+		$_SESSION['error'] = "";
+	}
+
 	//This php was written by ant
 	require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session check to make sure user is logged in.
 
-		function makeWebRequest($url){
-			$crl = curl_init($url);
-			curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
+	function makeWebRequest($url){
 
-			$res = curl_exec($crl);
+		$crl = curl_init($url);
+		curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
 
-			//Check for errors
-			if(curl_errno($crl)){
-				$error = $curl_error($crl);
-			}
+		$res = curl_exec($crl);
 
-			curl_close($crl);
-			$res_parsed = json_decode($res);
-			return $res_parsed;
+
+		//Check for errors
+		if(curl_errno($crl)){
+			$error = $curl_error($crl);
+
 		}
 
+		curl_close($crl);
+		$res_parsed = json_decode($res);
+		return $res_parsed;
+	}
 
-		if($_SERVER['REQUEST_METHOD'] == 'POST'){
-			if(!isset($_POST['action'])){
-				$err = "Invalid request";
-			};
 
-			$action = $_POST['action'];
+	if($_SERVER['REQUEST_METHOD'] == 'POST'){
+		//Handle any other stuff going on.
+		$action = $_POST['action'];
+		if($action){
 			switch($action){
 
-				case "save-favorite":
-					require_once __DIR__ . "/../src/recipes/saveFavorite.php";
-					break;
-				
-				case "remove-favorite":
-					require_once __DIR__ . "/../src/recipes/removeFavorite.php";
+				case "toggle-favorite":
+					require_once __DIR__ . "/../src/recipes/toggleFavorite.php";
 					break;
 
 				case "add-mealPlan":
@@ -45,34 +47,36 @@
 					break;
 			}
 		}
-		elseif($_SERVER['REQUEST_METHOD'] == 'GET'){
-			
-			//Don't waste making requests to the api if there's no id.
-			if(!isset($_GET['id'])){
-				die();
-			}
-			
-			$id = $_GET['id'];
-			
-			//Not sanitizing cause it's not my api. You're not hacking me you're hacking spoonacular.
-			$detailsURL = "https://api.spoonacular.com/recipes/$id/information?apiKey=79f089b8a521468eadcd3dcad358548a";
-			$instructionsURL = "https://api.spoonacular.com/recipes/$id/analyzedInstructions?apiKey=79f089b8a521468eadcd3dcad358548a";
+	}
 
-			//Make the reqs.
-			$recipe_details = makeWebRequest($detailsURL);
-			$recipe_instructions = makeWebRequest($instructionsURL);
+	elseif($_SERVER['REQUEST_METHOD'] == "GET"){
 
-			//Check for errors on those two e.g. not enough credits ugh
-			if($recipe_details->status === "failure" || $recipe_instructions->status === "failure"){
-				$error = [
-					$recipe_details->message,
-					$recipe_instructions->message
-				];
-			}
-			
-			//debug
-			//var_dump($recipe_instructions[0]->steps);
+		//Don't waste making requests to the api if there's no id.
+		if(!isset($_GET['recipe_id'])){
+			die();
 		}
+		
+		$recipe_id = $_GET['recipe_id'];
+		
+		//Not sanitizing cause it's not my api. You're not hacking me you're hacking spoonacular.
+		$detailsURL = "https://api.spoonacular.com/recipes/$recipe_id/information?apiKey=79f089b8a521468eadcd3dcad358548a";
+		$instructionsURL = "https://api.spoonacular.com/recipes/$recipe_id/analyzedInstructions?apiKey=79f089b8a521468eadcd3dcad358548a";
+
+		//Make the reqs.
+		$recipe_details = makeWebRequest($detailsURL);
+		$recipe_instructions = makeWebRequest($instructionsURL);
+
+		//Check for errors on those two e.g. not enough credits ugh
+		if($recipe_details->status === "failure" || $recipe_instructions->status === "failure"){
+			$error = [
+				$recipe_details->message,
+				$recipe_instructions->message
+			];
+		}
+		
+		//debug
+		//var_dump($recipe_details);
+	}
 ?>
 
 <!DOCTYPE html>
@@ -80,13 +84,13 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!--Display errors-->
-	<?=$error?>
 	<title>Gather & Savor | Recipe Details</title>
 	<link rel="stylesheet" href="style.css">
 	<script defer src="app.js"></script>
 </head>
 <body>
+	<h1><?=$error?></h1>
+	<h1><?php if(isset($_GET['msg'])) {echo $_GET['msg'];}?></h1>
 	<header>
 		<nav class="main-nav">
 			<div class="logo">
@@ -137,19 +141,13 @@
 
 
 			<form action="recipe-details.php" method = "POST" class=favorite-form>
-				<input type="hidden" name="recipe_id" value="<?=$recipe_id ?>">
-				<button type = "submit" name = "action" value = "add" class="btn secondary-btn">Add to Favorites</button>
-			</form>
-
-			<form action="recipe-details.php" method = "POST" class=favorite-form>
-				
-				<button type = "submit" name = "action" value = "remove" class="btn secondary-btn">Remove from Favorites</button>
+				<input type="hidden" name="recipe_id" value="<?=$recipe_id?>">
+				<button type = "submit" name = "action" value = "toggle-favorite" class="btn secondary-btn">Toggle Favorite</button>
 			</form>
 
 			<form action="recipe-details.php" method="POST" class="mealplan-form">
-				<!--<input type="hidden" name = "recipe_id" value="<?php //$recipe_id ?>"> -->
 				<input type="hidden" name="action" value="add-mealPlan">
-				<input type="hidden" name="recipe_id" value="901234'33'f"> <!--In the future this will just be the link to the item on the api-->
+				<input type="hidden" name="recipe_id" value="<?=$recipe_id?>"> <!--In the future this will just be the link to the item on the api-->
 
 				<label> Select a day:</label>
 				<select name="day" required>

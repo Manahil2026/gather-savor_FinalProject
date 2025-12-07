@@ -8,39 +8,31 @@ function redirect_with_msg($url, $msg_key, $msg_value){ // This function will re
 }
 
 
-function addMealPlan(){
-    require_once __DIR__ . '/../db.php'; //Include db connection file
-    $user_id = $_SESSION['user_id']; //Get user id from session
-    $recipe_id = $_POST['recipe_id']; // Get recipe id from the post request
-    $day = $_POST['day']; // Get day from the post request
 
-    // Make sure that the day sent in the post request is valid
-    $validDays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
-    if (!in_array($day, $validDays)){
+require_once __DIR__ . '/../db.php'; //Include db connection file
+$user_id = $_SESSION['user_id']; //Get user id from session
+$recipe_id = $_POST['recipe_id']; // Get recipe id from the post request
+$day = $_POST['day']; // Get day from the post request
 
-        //return back with errors
-        redirect_with_msg('recipe-details.php', 'error', 'Server error: ' . "Invalid day");
-    }
-
-    try {
-        $stmt = $conn->prepare("SELECT id FROM meal_plans_updated WHERE user_id = ?"); 
-        $stmt->execute([$user_id]);
-
-        //Update the selected day with recipe_id
-        $stmt = $conn->prepare("insert into meal_plans_updated (id, user_id, day, link, updated_at) values (2, ? , ?, ?, '2025-12-03 17:45:00')");
-        $stmt->execute([$user_id,$day,$recipe_id]);
-
-        //Redirect back to meal planner page
-        header("Location: recipe-details.php");
-
-
-    }catch(PDOException $e){
-         redirect_with_msg('recipe-details.php', 'error', 'Server error: ' . $e->getMessage());
-    };
-
-
-    exit;
+// Make sure that the day sent in the post request is valid
+$validDays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+if (!in_array($day, $validDays)){
+    //return back with errors
+    header("Location: http://localhost/recipe-details.php?msg=invalidday&recipe_id=$recipe_id");
 }
 
-addMealPlan();
+try {
+    //Update the selected day with recipe_id
+    $stmt = $conn->prepare("insert into meal_plans (user_id,recipe_id, day) values (?,?,?)");
+    $stmt->execute([$user_id,$recipe_id,$day]);
+    header("Location: recipe-details.php?recipe_id=$recipe_id");
+    //Redirect back to meal planner page
+ 
+
+}catch(PDOException $e){
+        header("Location: http://localhost/recipe-details.php?msg=$e&recipe_id=$recipe_id");
+};
+
+
+
 ?>

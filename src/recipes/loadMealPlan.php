@@ -12,10 +12,4 @@ $stmt = $conn->prepare("SELECT day, link FROM meal_plans WHERE user_id = :user "
 $stmt->execute([':user' => $user_id]);
 
 $meal_plan = $stmt->fetch(PDO::FETCH_ASSOC); //Fetch meal plan as an associative array
-
-echo [
-        "state" => "success",
-        "message" => $meal_plan    
-    ];
-
 ?>

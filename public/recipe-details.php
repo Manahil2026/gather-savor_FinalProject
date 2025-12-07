@@ -1,16 +1,33 @@
 <?php
-	session_start();
+
+	//This php was written by ant
 	require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session check to make sure user is logged in.
 
-	
+		function makeWebRequest($url){
+			$crl = curl_init($url);
+			curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
+
+			$res = curl_exec($crl);
+
+			//Check for errors
+			if(curl_errno($crl)){
+				$error = $curl_error($crl);
+			}
+
+			curl_close($crl);
+			$res_parsed = json_decode($res);
+			return $res_parsed;
+		}
+
+
 		if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			if(!isset($_POST['action'])){
-				$error = "Invalid request";
+				$err = "Invalid request";
 			};
 
 			$action = $_POST['action'];
-
 			switch($action){
+
 				case "save-favorite":
 					require_once __DIR__ . "/../src/recipes/saveFavorite.php";
 					break;
@@ -27,11 +44,34 @@
 					$error = "Invalid request";
 					break;
 			}
-		};
+		}
+		elseif($_SERVER['REQUEST_METHOD'] == 'GET'){
+			
+			//Don't waste making requests to the api if there's no id.
+			if(!isset($_GET['id'])){
+				die();
+			}
+			
+			$id = $_GET['id'];
+			
+			//Not sanitizing cause it's not my api. You're not hacking me you're hacking spoonacular.
+			$detailsURL = "https://api.spoonacular.com/recipes/$id/information?apiKey=79f089b8a521468eadcd3dcad358548a";
+			$instructionsURL = "https://api.spoonacular.com/recipes/$id/analyzedInstructions?apiKey=79f089b8a521468eadcd3dcad358548a";
 
-		if(isset($_SESSION['error'])){
-			$error = $_SESSION['error'];
-			unset($_SESSION['error']);
+			//Make the reqs.
+			$recipe_details = makeWebRequest($detailsURL);
+			$recipe_instructions = makeWebRequest($instructionsURL);
+
+			//Check for errors on those two e.g. not enough credits ugh
+			if($recipe_details->status === "failure" || $recipe_instructions->status === "failure"){
+				$error = [
+					$recipe_details->message,
+					$recipe_instructions->message
+				];
+			}
+			
+			//debug
+			//var_dump($recipe_instructions[0]->steps);
 		}
 ?>
 
@@ -64,33 +104,37 @@
 	</header>
 
 	<main class="page-container">
-		<section class="page-header">
-			<h1>Recipe Details</h1>
-			<p>Full recipe information will appear here.</p>
-		</section>
 
 		<section id="recipe-details" class="recipe-details">
 			<div class="recipe-main">
-				<h2 id="recipe-title">Recipe Title</h2>
-				<img id="recipe-image" src="" alt="Recipe Image" class="recipe-image"/>
-				<p id="recipe-summary" class="recipe-summary">Recipe summary or description.</p>
+				<h2 id="recipe-title"><?php echo $recipe_details->title?></h2>
+				<img id="recipe-image" src="<?php echo $recipe_details->image?>" alt="Recipe Image" class="recipe-image"/>
 			</div>
 
-			<div class="recipe-columns">
-				<div class="ingredients-column">
-					<h3>Ingredients</h3>
-					<ul id="ingredients-list">
-						<li>Ingredient placeholder</li>
-					</ul>
-					<button id="add-to-shopping-list" class="btn secondary-btn">Add Ingredients to Shopping List</button>
-				</div>
-				<div class="instructions-column">
-					<h3>Instructions</h3>
-					<ol id="instructions-list">
-						<li>Step placeholder</li>
-					</ol>
-				</div>
+			<div class="ingredient-list">
+				<h3>Ingredients:</h3>
+				<ul>
+					<?php 
+						$ingredients = $recipe_details->extendedIngredients;
+						foreach ($ingredients as $ingredient){
+							echo "<li>$ingredient->original</li>";
+						}
+					?>
+				</ul>
 			</div>
+
+			<div class="recipe-instructions">
+				<h3>Instructions</h3>
+				<ol>
+					<?php 
+						foreach ($recipe_instructions[0]->steps as $step){
+							echo "<li>$step->step</li>";
+						}
+					?>
+				</ol>
+				
+			</div>
+
 
 			<form action="recipe-details.php" method = "POST" class=favorite-form>
 				<input type="hidden" name="recipe_id" value="<?=$recipe_id ?>">

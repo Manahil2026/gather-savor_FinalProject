@@ -1,9 +1,8 @@
 <?php 
 
 // This file loads the favorite recipes for specific user for favorites.php page
-
 //authentication is checked on the api
-require_once __DIR__ . '/../db.php'; //Include dp connection file
+require_once __DIR__ . '/../db.php'; //Include db connection file
 
 $user_id = $_SESSION['user_id']; //Get user id from session
 
@@ -11,9 +10,4 @@ $stmt = $conn->prepare("SELECT * FROM favorites_updated WHERE user_id = :user OR
 $stmt->execute([':user' => $user_id]);
 
 $favorites = $stmt->fetchAll(PDO::FETCH_ASSOC); //Fetch all favorite recipes as an associative array
-
-echo [
-        "state" => "success",
-        "message" => $favorites    
-    ];
 ?>

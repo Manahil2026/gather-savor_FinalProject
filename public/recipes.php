@@ -4,8 +4,29 @@ require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session c
 //https://stackoverflow.com/questions/9802788/call-a-rest-api-in-php
 
 
+	//For this project I am leaving the keys out in the open because it's not a real production server, but obviously you would use .env
+	$url = "https://api.spoonacular.com/recipes/complexSearch?apiKey=79f089b8a521468eadcd3dcad358548a&number=20"; 
+	$crl = curl_init($url);
+	curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
 
+	$res = curl_exec($crl);
+	//Check for errors
+	if(curl_errno($crl)){
+		error_message($curl_error($crl));
+	}
+
+	curl_close($crl);
+
+	$res_parsed = json_decode($res);
+	
+
+	if($res_parsed->status === "failure"){
+		$error = $res_parsed->message;
+	}
+	//var_dump($res_parsed->results[0]->id);
 ?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,9 +71,28 @@ require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session c
 		</section>
 
 		<!-- Populate-->
-		<button id="loadButton">Load the Recipes</button>
-		<section id="recipe-results" class="card-grid">
-			<p class="placeholder-text">Search for a recipe to see results here.</p>
+		<section id="recipe-results" class="card-grid" style="display: flex; gap: 20px; flex-wrap: wrap; padding: 20px">
+
+			<?php 
+				if($error){
+					echo "<p>There was an error: $error</p>";
+				}
+				else{
+					if(count($res_parsed->results) > 0){
+						foreach($res_parsed->results as $object){
+							echo "<div id=$object->id class='food-item'>";
+							echo "<img src='" . $object->image . "'>";
+							echo "<p>" . $object->title . "</p>";
+							echo "</div>";
+						}
+				}
+			
+				else{
+					echo "<h1>No results found</h1>";
+				}
+				}
+				
+			?>
 		</section>
 	</main>
 	<script src="assets/js/recipes.js"></script>

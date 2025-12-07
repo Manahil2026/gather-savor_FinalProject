@@ -1,35 +1,22 @@
-//Get a bunch of recipes from the api
-//Make request to some endpoint. I'll call it api?
-//Parse the results
+//Apply a button to every food, get its ID and send the client to recipe-details
+
+const recipeData = document.querySelector("#recipe-results");
+
+const foods = recipeData.querySelectorAll('.food-item');
 
 
-//Get the section <id = recipe-results>
+foods.forEach(food => {
+    const newBtn = document.createElement('button');
+    newBtn.textContent = "Get Details"
+    food.appendChild(newBtn);
+    
+    newBtn.addEventListener('click', getRecipeDetails);
 
 
-const loadButton = document.querySelector("#loadButton");
-function getRecipes(){
-    fetch("/api/v1/dbAPI.php", {
-    method: "POST",
-    credentials: "include",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-            data: {
-                "action": "add",
-                "table": "favorites",
-                "values": {"link":"https://google.com"}
-            }
-        })
-    })
-    .then(res => res.json())
-    .then(data => console.log(data));
+})
+
+
+function getRecipeDetails(event){
+    const id = event.target.closest("div").id;
+    window.location.href = `http://localhost/recipe-details.php?id=${id}`;
 }
-
-loadButton.addEventListener('click',getRecipes);
-
-//Create a dom element and attach to recipe results
-
-//When you click on one of the recipes, it makes a post request to recipe-details and pulls up the url and fills everything in
-
-//the recipe details page has the make favorite button and an add to meal plan button

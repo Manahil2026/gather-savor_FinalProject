@@ -20,6 +20,11 @@ while($row = $result->FETCH_ASSOC()){
     $grouped[$row['recipe_id']][] = $row;
 }
 
-echo json_encode($grouped);
+
+header('Content-Type: application/json');
+echo json_encode([
+    "status" => "success",
+    "message" => $grouped
+]);
 
 ?>

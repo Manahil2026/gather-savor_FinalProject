@@ -1,6 +1,38 @@
 <?php
 require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session check to make sure user is logged in.
-$user_id = $_SESSION['user_id'];
+require_once __DIR__ . '/../src/messages.php'; 
+
+
+  if($_SERVER['REQUEST_METHOD'] == "POST"){
+    if(!isset($_POST['action'])){
+      error_message("Action not set");
+      exit;
+    }
+    $action = $_POST['action'];
+
+    switch($action){
+      case "get-shoppingList":
+        include __DIR__ . '/../src/shopping-list/getShoppingList.php';
+        break;
+
+        case "get-shoppingIngredients":
+          include __DIR__ . '/../src/shopping-list/getIngredientsList.php';
+          break;
+      case "add-ingredient":
+        include __DIR__ . '/../src/shopping-list/addIngredient.php';
+        break;
+
+      case "remove-ingredient":
+        include __DIR__ . '/../src/shopping-list/removeIngredient.php';
+        break;
+
+      default: 
+        error_message("Invalid request");
+        break;
+    }
+    exit;
+  }
+
 ?>
 
 <!DOCTYPE html>
@@ -49,11 +81,8 @@ $user_id = $_SESSION['user_id'];
 
     </section>
 
-    <!-- Pass user_id to JS if needed -->
-    <script>
-      const USER_ID = <?= json_encode($user_id); ?>;
-    </script>
 
   </main>
+  <script src="assets/js/shopping.js"></script>
 </body>
 </html>

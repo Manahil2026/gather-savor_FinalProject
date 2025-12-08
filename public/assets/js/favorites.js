@@ -56,13 +56,13 @@ function sendRemoveRequest(event){
     })
     .then(res => res.json())
     .then(res => {
-        if(res.status === "success"){
-            showToast(success, "Successfully removed the favorite!");
+        if(res.status == "success"){
+            showToast(true, "Successfully removed the favorite!");
             recipeCard.remove();
         }
         else{
             //trigger error modal
-            showToast(error, res.message);
+            showToast(false, res.message);
         }
 
     })

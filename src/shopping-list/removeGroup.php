@@ -1,19 +1,27 @@
 <?php 
 
+//remove every ingredient identified by recipe_id;
 require_once __DIR__ . "/../db.php";
-require_once __DIR__ . "/../auth/checkSession.php";
 
-if(!isset($_POST['recipe_id'])){
-    die("Missing recipe ID");
+try{
+    if(!isset($_POST['recipe_id'])){
+        error_message("Missing Recipe id");
+        exit;
+    }
+
+
+    $user_id = $_SESSION['user_id'];
+    $recipe_id = $_POST['recipe_id'];
+
+    $stmt = $conn->prepare("DELETE FROM shopping_lists WHERE user_id = ? AND recipe_id = ?");
+    $stmt->execute($user_id,$recipe_id);
+
+    success_message("Successfully removed");
+
+
 }
-
-$user_id = $_SESSION['user_id'];
-$recipe_id = $_POST['recipe_id'];
-
-$stmt = $conn->prepare("DELETE FROM shopping_lists WHERE user_id = ? AND recipe_id = ?");
-$stmt->bind_param("is", $user_id, $recipe_id);
-$stmt->execute();
-
-echo "success";
-
+catch(PDOException $e){
+    error_message($e);
+}
+exit;
 ?>

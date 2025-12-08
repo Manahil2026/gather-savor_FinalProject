@@ -3,6 +3,7 @@
 
 	//protected route
 	require_once __DIR__ . '/../src/auth/checkSession.php'; 
+	require_once __DIR__ . '/../src/messages.php'; 
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		
@@ -21,11 +22,19 @@
 				case "checkfavorite":
 					require_once __DIR__ . "/../src/recipes/checkfavorite.php";
 					break;
+				case "toggle-shoppingList":
+					require_once __DIR__ . "/../src/shopping-list/toggleShoppingList.php";
+					break;
+				case "check-shoppingList":
+					require_once __DIR__ . "/../src/shopping-list/checkShoppingList.php";
 				default:
+					error_message("invalid request");
 					break;
 			}
 		}
+		exit;
 	}
+
 ?>
 
 <!DOCTYPE html>
@@ -76,14 +85,14 @@
 	<header>
 		<nav class="main-nav">
 			<div class="logo">
-				<a href="Home.php">Gather & Savor</a>
+				<a href="home.php">Gather & Savor</a>
 			</div>
 			<ul class="nav-links">
 				<li><a href="home.php">Home</a></li>
 				<li><a href="recipes.php">Recipes</a></li>
 				<li><a href="meal-planner.php">Meal Planner</a></li>
 				<li><a href="favorites.php">Favorites</a></li>
-				<li><a href="shopping-List.php">Shopping List</a></li>
+				<li><a href="shopping-list.php">Shopping List</a></li>
 				<li><a href="logout.php">Logout</a></li>
 			</ul>
 		</nav>
@@ -124,7 +133,7 @@
 
 				<button id="showModal">Add to meal plan</button>
 
-				<button id="add-to-shoppinglist">Add to Shopping List</button>
+				<button id="toggleShoppingList">Add to Shopping List</button>
 
 			</div>
 		</section>

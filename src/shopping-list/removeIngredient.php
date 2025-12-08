@@ -1,19 +1,26 @@
 <?php 
 
 require_once __DIR__ . "/../db.php";
-require_once __DIR__ . "/../auth/checkSession.php";
+require_once __DIR__ . '/../messages.php'; //error and success message for client
 
-if(!isset($_POST['id'])){ //If id is missing from post request terminate with msg
-    die("Missing ID");
+
+try{
+    $user_id = $_SESSION['user_id']; //Get user id from session
+
+    if(!isset($_POST['ingredient'])){
+        error_message("Missing ingredient");
+        exit;
+    }
+
+    $ingredient = $_POST['ingredient'];
+    $stmt = $conn->prepare("DELETE FROM shopping_lists WHERE id = ? and user_id = ?");
+    $stmt->execute([$user_id,$ingredient]);
+    success_mesage("successfully removed ingredient");
+}
+catch(PDOException $e){
+    error_message($e);
 }
 
-$user_id = $_SESSION['user_is']; //Get user id from session
-$id = $_POST['id']; //Get shopping id from post request
 
-$stmt = $conn->prepare("DELETE FROM shopping_lists WHERE id = ? AND user_id = ?");
-$stmt->bind_param("ii", $id , $user_id);
-$stmt->execute();
-
-echo 'success';
-
+exit;
 ?>

@@ -4,16 +4,16 @@
   max-width: 800px;
   margin: 2rem auto;
   padding: 0 1rem 2rem;
-  background: #fffaf3;
+  background: #d3b58b;
   border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(120, 66, 18, 0.15);
+  box-shadow: 0 8px 24px rgba(122, 74, 47);
 }
 
 .page-header {
   text-align: center;
   padding: 2rem 1rem;
-  background: linear-gradient(135deg, #8b5e34 0%, #d38b3a 45%, #f4a259 100%);
-  color: #fff7e6;
+  background: linear-gradient(135deg, #4b2b1b 0%, #FF7518 45%, #D7942D 100%);
+  color: #cb997e;
   border-radius: 12px 12px 0 0;
   margin: -2rem -1rem 0 -1rem;
 }
@@ -26,7 +26,7 @@
 .placeholder-text {
   text-align: center;
   padding: 4rem 2rem;
-  color: #7a4b2a;
+  color: #bc6c25;
   font-size: 1.05rem;
   font-style: italic;
 }
@@ -118,7 +118,7 @@
   width: 20px;
   height: 20px;
   margin-right: 1rem;
-  accent-color: #667eea;
+  accent-color: #e76f51;
   cursor: pointer;
 }
 
@@ -256,6 +256,7 @@ button {
   display: none;
   }
 }
+
 
 
 

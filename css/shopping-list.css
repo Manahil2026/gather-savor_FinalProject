@@ -104,7 +104,7 @@
   align-items: center;
   padding: 1rem 1.5rem;
   border-bottom: 1px solid #f1f5f9;
-  transistion: background-color 0.2s ease;
+  transition: background-color 0.2s ease;
   cursor: pointer;
 }
 
@@ -161,7 +161,7 @@
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 8px;
-  font-szie: 0.9rem;
+  font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.2s ease;
   font-weight: 500;
@@ -258,3 +258,4 @@ button {
   display: none;
   }
 }
+

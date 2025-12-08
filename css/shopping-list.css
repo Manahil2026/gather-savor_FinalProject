@@ -3,40 +3,37 @@
 .shopping-list-container {
   max-width: 800px;
   margin: 2rem auto;
-  padding: 0 1rem;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
+  padding: 0 1rem 2rem;
+  background: #fffaf3;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(120, 66, 18, 0.15);
 
 .page-header {
   text-align: center;
   padding: 2rem 1rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #8b5e34 0%, #d38b3a 45%, #f4a259 100%);
+  color: #fff7e6;
   border-radius: 12px 12px 0 0;
   margin: -2rem -1rem 0 -1rem;
 }
 
 .page-header p {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   opacity: 0.9;
-  margin: 0;
 }
 
 .placeholder-text {
   text-align: center;
   padding: 4rem 2rem;
-  color: #666;
-  font-size: 1.1rem;
+  color: #7a4b2a;
+  font-size: 1.05rem;
   font-style: italic;
 }
 
 .placeholder-text::before {
-  content: "🛒";
+  content: "🧺";
   display: block;
-  font-size: 4rem;
-  margin-bottom: 1rem;
+  font-size: 1rem;
   animation: bounce 2s infinite;
 }
 
@@ -258,4 +255,5 @@ button {
   display: none;
   }
 }
+
 

@@ -7,50 +7,9 @@
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Times New Roman", sans-serif;
+  font-family: system-ui, -apple-system, BlankMacSystemFont, "Times New Roman", sans-serif;
   background: #f7f5f2;
   color: #222;
-}
-
-header {
-  background: #222;
-  color: #fff;
-}
-
-.main-nav {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0.75rem 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.logo a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 1.3rem;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1rem;
-  margin: 0;
-  padding: 0;
-}
-
-.nav-links a {
-  color: #ddd;
-  text-decoration: none;
-  font-size: 0.95rem;
-}
-
-.nav-links a.active,
-.nav-links a:hover {
-  color: #fff;
-  border-bottom: 2px solid #ff7e3d;
 }
 
 .page-container {
@@ -75,6 +34,8 @@ header {
   font-size: 0.95rem;
   cursor: pointer;
   font-weight: 500;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .primary-btn {
@@ -83,7 +44,7 @@ header {
 }
 
 .primary-btn:hover {
-  background: #ff945f;
+  backgrounds: #ff945f;
 }
 
 .secondary-btn {
@@ -156,47 +117,7 @@ header {
   flex: 0 0 180px;
 }
 
-.recipe-details {
-  margin-top: 1.5rem;
-}
-
-.recipe-main {
-  margin-bottom: 1.5rem;
-}
-
-.recipe-image {
-  width: 100%;
-  max-height: 380px;
-  object-fit: cover;
-  border-radius: 16px;
-  margin-top: 0.75rem;
-}
-
-.recipe-summary {
-  margin-top: 0.75rem;
-  color: #555;
-}
-
-.recipe-columns {
-  display: grid;
-  grid-template-columns: 1.1fr 1.3fr;
-  gap: 2rem;
-  align-items: flex-start;
-  margin-top: 1.5rem;
-}
-
-.favorite-form,
-.mealplan-form {
-  margin-top: 1rem;
-}
-
 @media (max-width: 768px) {
-  .main-nav {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-
   .recipe-columns {
     grid-template-columns: 1fr;
   }

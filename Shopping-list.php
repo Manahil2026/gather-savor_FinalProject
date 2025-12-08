@@ -9,9 +9,9 @@ $user_id = $_SESSION['user_id'];
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gather & Savor | Shopping List</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="header.css">
-  <link rel="stylesheet" href="shopping-list.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/shopping-list.css">
   <script defer src="shopping-list.js"></script>
 </head>
 <body>

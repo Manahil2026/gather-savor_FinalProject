@@ -7,10 +7,11 @@ $user_id = $_SESSION['user_id'];
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width", initial-scale=1.0">
   <title>Gather & Savor | Shopping List</title>
   <link rel="stylesheet" href="style.css">
-  <script defer src="app.js"></script> <!-- app.js will be replaced with shopping-list.js which will provoide logic for rendering ingredients from api -->
+  <link rel="stylesheet" href="shopping-list.css">
+  <script defer src="shopping-list.js"></script>
 </head>
 <body>
   <header>

@@ -9,10 +9,10 @@
 
 .auth-card {
   background: #fff;
-  width: 320px;
+  width: 320px; /* narrow, tall card */
   padding: 1.75rem 1.5rem;
-  border-radius: 14px;
-  border: 1px solid #ddd;
+  border-radius: 24px; /* make this bigger for rounder edges */
+  border: 1px solid #ddd; /* thin border */
   box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 }
 
@@ -101,5 +101,6 @@
 }
 
   
+
 
 

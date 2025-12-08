@@ -2,7 +2,7 @@
 // This file establishes a connection to the database
 // This will be included via require function in other PHP files that meed database access
 
-$dbname = 'gather_savor';
+$dbname = 'gather_savor_main';
 $username = 'root'; // root is the dafault username for XAMPP
 $password = ''; // I will leave this empty because XAMPP's default psswrd is empty
 $dsn = "mysql:host=localhost;dbname=$dbname";

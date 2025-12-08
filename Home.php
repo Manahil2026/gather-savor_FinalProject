@@ -8,7 +8,8 @@ require_once __DIR__ . '/php/auth/checkSession.php'; // Include the session chec
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gather & Savor | Home</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/style.css">
   <script defer src="app.js"></script>
 </head>
 <body>

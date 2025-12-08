@@ -8,7 +8,8 @@ session_start(); // Start a new session or resume existing one
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gather & Savor | Login</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <header>

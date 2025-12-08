@@ -6,9 +6,9 @@ $meal_plan = require __DIR__ . '/php/recipes/loadMealPlan.php'; //Load meal plan
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="header.css">
-	<link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="planner.css">
+	<link rel="stylesheet" href="css/header.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/planner.css">
 	<script defer src="meal-planner.js"></script>
 </head>
 <body>

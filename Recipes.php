@@ -4,9 +4,9 @@ require_once __DIR__ . '/php/auth/checkSession.php'; // Include the session chec
 <!DOCTYPE html>
 <html>
 <head>
-	<link href="stylesheet" href="header.css">
-	<link href="stylesheet" href="style.css">
-	<link href="stylesheet" href="recipe-card.css">
+	<link rel="stylesheet" href="css/header.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/recipe-card.css">
 	<script defer src="js/recipes.js"></script>
 </head>
 <body>

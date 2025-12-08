@@ -9,7 +9,8 @@ $favorites = require __DIR__ . '/php/recipes/loadFavorites.php'; //Load favorite
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gather & Savor | Favorites</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/style.css">
   <script defer src="app.js"></script>
 </head>
 <body>

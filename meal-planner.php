@@ -10,7 +10,8 @@ $meal_plan = require __DIR__ . '/php/recipes/loadMealPlan.php'; //Load meal plan
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Gather & Savor | Meal Planner</title>
 	<link rel="stylesheet" href="style.css">
-	<script defer src="app.js"></script> <!-- Instead of app.js meal-planner.js will come here which will fetch the recipe titles from the API and render them --> 
+	<link rel="stylesheet" href="planner.css">
+	<script defer src="meal-planner.js"></script>
 </head>
 <body>
 	<header>

@@ -134,7 +134,7 @@ header {
 .placeholder-text {
   grid-column: 1 / -1;
   color: #777;
-  font-style: Times New Roman;
+  font-family: "Times New Roman", serif;
 }
 
 .recipe-details {
@@ -195,7 +195,8 @@ header {
     gap: 0.5rem;
   }
 
-.recipe-columns {
-  grid-template-columns: 1fr;
+  .recipe-columns {
+    grid-template-columns: 1fr;
+  }
 }
-}
+

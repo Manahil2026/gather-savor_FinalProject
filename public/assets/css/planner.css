@@ -46,7 +46,7 @@
 }
 
 .placeholder-text,
-loading-text {
+.loading-text {
   margin: 0;
   font-size: 0.9rem;
   color: #777;
@@ -64,7 +64,8 @@ loading-text {
 }
 
 @media (max-width: 600px) {
-  .meal-plan-grid {
+  .meal-planner-grid {
     grid-template-columns: 1fr;
   }
 }
+

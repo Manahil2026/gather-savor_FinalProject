@@ -8,7 +8,8 @@ require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session c
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gather & Savor | Home</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="assets/css/header.css">
+  <link rel="stylesheet" href="assets/css/style.css">
   <script defer src="app.js"></script>
 </head>
 <body>
@@ -32,7 +33,7 @@ require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session c
     <section class="hero">
       <h1>Plan Smarter. Eat Better.</h1>
       <p>Search recipes, create weekly meal plan, and generate a personalized shopping list.</p>
-      <a class="btn primary-btn" href="Recipes.php">Explore Recipes</a>
+      <a class="btn primary-btn" href="recipes.php">Explore Recipes</a>
     </section>
 
     <section class="home-grid">
@@ -51,7 +52,7 @@ require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session c
       <article class="home-card">
         <h2>Shopping List</h2>
         <p>Automatically build a grocery list based on your selected recipes.</p>
-        <a href="Shopping-list.php" class="link">View Shopping List</a>
+        <a href="shopping-list.php" class="link">View Shopping List</a>
       </article>
     </section>
   </main>

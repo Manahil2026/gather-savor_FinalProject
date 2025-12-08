@@ -2,14 +2,28 @@
 
 
 require_once __DIR__ . '/../db.php'; // Include db connection file
-require_once __DIR__ . '/../auth/checkSession.php'; // Ensure user is logged in
+require_once __DIR__ . '/../messages.php';
 
-$user_id = $_SESSION['user_id']; // Get user id from session
+try{
 
-$recipe_id = $_POST['recipe_id'] ?? '';
-$stmt = $conn->prepare("DELETE FROM favorites WHERE user_id = :user AND recipe_id = :rid LIMIT 1");
-$stmt->execute([':user' => $user_id, ':rid' => $recipe_id]);
+    $user_id = $_SESSION['user_id']; // Get user id from session
 
-header('Location: favorites.php?msg=Recipe removed from favorites'); //Redirect to favprites page with msg
+
+    if(!isset($_POST['recipe_id'])){
+        error_message("missing recipe id");
+        exit;
+    }
+
+    $recipe_id = $_POST['recipe_id'];
+    $stmt = $conn->prepare("DELETE FROM favorites WHERE user_id = :user AND recipe_id = :rid LIMIT 1");
+    $stmt->execute([':user' => $user_id, ':rid' => $recipe_id]);
+
+    success_message("Successfully removed from favorites");
+
+}
+catch(PDOException $e){
+    error_message($e);
+}
+
 exit;
 ?>

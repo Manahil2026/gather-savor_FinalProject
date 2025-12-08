@@ -7,20 +7,15 @@ require_once __DIR__ . '/../messages.php'; //error and success message for clien
 $user_id = $_SESSION['user_id']; //Get user id from session
 $recipe_id = $_POST['recipe_id']; // Get recipe id from the post request
 $day = $_POST['day']; // Get day from the post 
-$recipe_title = $_POST['recipe_title'];
 
-// Make sure that the day sent in the post request is valid
-$validDays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
-if (!in_array($day, $validDays)){
-    //return back with errors
-    error_message("Invalid day");
-}
 
 try {
     //Update the selected day with recipe_id
-    $stmt = $conn->prepare("insert into meal_plans (user_id,recipe_id, day, recipe_title) values (?,?,?,?)");
-    $stmt->execute([$user_id,$recipe_id,$day,$recipe_title]);
-    success_message("Successfully added to meal plan");
+    $stmt = $conn->prepare("delete from meal_plans where user_id = ? and recipe_id = ? and day = ?");
+    $stmt->execute([
+        $user_id, $recipe_id, $day
+    ]);
+    success_message("Successfully deleted from meal plan");
  
 
 }catch(PDOException $e){

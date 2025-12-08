@@ -1,35 +1,11 @@
 <?php
+	//This php was written by ant, it's a routing mechanism to facilitate the Javascript
 
-	if($_SESSION['error']){
-		$error = $_SESSION['error'];
-		$_SESSION['error'] = "";
-	}
-
-	//This php was written by ant
-	require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session check to make sure user is logged in.
-
-	function makeWebRequest($url){
-
-		$crl = curl_init($url);
-		curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
-
-		$res = curl_exec($crl);
-
-
-		//Check for errors
-		if(curl_errno($crl)){
-			$error = $curl_error($crl);
-
-		}
-
-		curl_close($crl);
-		$res_parsed = json_decode($res);
-		return $res_parsed;
-	}
-
+	//protected route
+	require_once __DIR__ . '/../src/auth/checkSession.php'; 
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
-		//Handle any other stuff going on.
+		
 		$action = $_POST['action'];
 		if($action){
 			switch($action){
@@ -42,40 +18,13 @@
 					require_once __DIR__ . "/../src/recipes/addToMealPlan.php";
 					break;
 
+				case "checkfavorite":
+					require_once __DIR__ . "/../src/recipes/checkfavorite.php";
+					break;
 				default:
-					$error = "Invalid request";
 					break;
 			}
 		}
-	}
-
-	elseif($_SERVER['REQUEST_METHOD'] == "GET"){
-
-		//Don't waste making requests to the api if there's no id.
-		if(!isset($_GET['recipe_id'])){
-			die();
-		}
-		
-		$recipe_id = $_GET['recipe_id'];
-		
-		//Not sanitizing cause it's not my api. You're not hacking me you're hacking spoonacular.
-		$detailsURL = "https://api.spoonacular.com/recipes/$recipe_id/information?apiKey=79f089b8a521468eadcd3dcad358548a";
-		$instructionsURL = "https://api.spoonacular.com/recipes/$recipe_id/analyzedInstructions?apiKey=79f089b8a521468eadcd3dcad358548a";
-
-		//Make the reqs.
-		$recipe_details = makeWebRequest($detailsURL);
-		$recipe_instructions = makeWebRequest($instructionsURL);
-
-		//Check for errors on those two e.g. not enough credits ugh
-		if($recipe_details->status === "failure" || $recipe_instructions->status === "failure"){
-			$error = [
-				$recipe_details->message,
-				$recipe_instructions->message
-			];
-		}
-		
-		//debug
-		//var_dump($recipe_details);
 	}
 ?>
 
@@ -85,12 +34,45 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Gather & Savor | Recipe Details</title>
-	<link rel="stylesheet" href="style.css">
-	<script defer src="app.js"></script>
+	<link rel="stylesheet" href="assets/css/toast.css"> 
+	<link rel="stylesheet" href="assets/css/modal.css">
+	<link rel="stylesheet" href="assets/css/header.css">
+	<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-	<h1><?=$error?></h1>
-	<h1><?php if(isset($_GET['msg'])) {echo $_GET['msg'];}?></h1>
+
+	<div id="modal" class="modal-hidden">
+		<label> Select a day:</label>
+		<div>
+			<select id="day-selection" required>
+			<option value="" disabled selected>Select day</option>
+			<option value="monday">Monday</option>
+			<option value="tuesday">Tuesday</option>
+			<option value="wednesday">Wednesday</option>
+			<option value="thursday">Thursday</option>
+			<option value="friday">Friday</option>
+			<option value="saturday">Saturday</option>
+			<option value="sunday">Sunday</option>
+		</select> 
+		<button id="add-mealplan-button" class="btn secondary-btn">Add to Meal Plan</button>
+		<button id="close modal">Close</button>
+		
+		</div>
+		
+	</div>
+
+
+	<div class="toast">
+		<p>Successfully added to favorites!</p>
+	</div>
+	
+
+	<?php 
+		//This is here to pass parameters to javascript
+		$recipe_id = isset($_GET['recipe_id']) ? $_GET['recipe_id'] : ""; 
+		echo '<input id="recipe_id" type="hidden" value=' . $recipe_id . ">";
+	?>
+
 	<header>
 		<nav class="main-nav">
 			<div class="logo">
@@ -110,61 +92,44 @@
 	<main class="page-container">
 
 		<section id="recipe-details" class="recipe-details">
+
+			<!--Title, picture, details-->
 			<div class="recipe-main">
-				<h2 id="recipe-title"><?php echo $recipe_details->title?></h2>
-				<img id="recipe-image" src="<?php echo $recipe_details->image?>" alt="Recipe Image" class="recipe-image"/>
+				<h2 id="recipe-title"></h2>
+				<img id="recipe-image" alt="" class="recipe-image"/>
 			</div>
 
-			<div class="ingredient-list">
+
+			<!--Ingredients List-->
+			<div class="ingredients-list">
 				<h3>Ingredients:</h3>
-				<ul>
-					<?php 
-						$ingredients = $recipe_details->extendedIngredients;
-						foreach ($ingredients as $ingredient){
-							echo "<li>$ingredient->original</li>";
-						}
-					?>
+				<ul id="recipe-ingredients">
 				</ul>
 			</div>
 
-			<div class="recipe-instructions">
-				<h3>Instructions</h3>
-				<ol>
-					<?php 
-						foreach ($recipe_instructions[0]->steps as $step){
-							echo "<li>$step->step</li>";
-						}
-					?>
-				</ol>
-				
+			<!--Instructions for the recipe-->
+			<div class="instructions-list">
+				<h3>Instructions</h3>	
+				<div id="recipe-instructions">
+					
+				</div>
 			</div>
 
 
-			<form action="recipe-details.php" method = "POST" class=favorite-form>
-				<input type="hidden" name="recipe_id" value="<?=$recipe_id?>">
-				<button type = "submit" name = "action" value = "toggle-favorite" class="btn secondary-btn">Toggle Favorite</button>
-			</form>
+			<!--temporary div cause the style is really bugging me-->
+			<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: center">
 
-			<form action="recipe-details.php" method="POST" class="mealplan-form">
-				<input type="hidden" name="action" value="add-mealPlan">
-				<input type="hidden" name="recipe_id" value="<?=$recipe_id?>"> <!--In the future this will just be the link to the item on the api-->
+				<!--Favorites button (change w/ javascript?)-->
+				<button id="toggleFavorite">Add Favorite</button>
 
-				<label> Select a day:</label>
-				<select name="day" required>
-					<option value="" disabled selected>Select day</option>
-					<option value="monday">Monday</option>
-					<option value="tuesday">Tuesday</option>
-					<option value="wednesday">Wednesday</option>
-					<option value="thursday">Thursday</option>
-					<option value="friday">Friday</option>
-					<option value="saturday">Saturday</option>
-					<option value="sunday">Sunday</option>
-				</select> 
-				
-				<button type="submit" class="btn secondary-btn">Add to Meal Plan</button>
-			</form>
+				<button id="showModal">Add to meal plan</button>
 
+				<button id="add-to-shoppinglist">Add to Shopping List</button>
+
+			</div>
 		</section>
 	</main>
+
+	<script src="assets/js/recipe-details.js"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS gather_savor;
-USE gather_savor;
+CREATE DATABASE IF NOT EXISTS gather_savor_main;
+USE gather_savor_main;
 
 -- Users Table (Stores user information for authentication and profiles)
 CREATE TABLE IF NOT EXISTS users (

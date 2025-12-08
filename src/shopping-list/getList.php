@@ -21,10 +21,4 @@ while($row = $result->FETCH_ASSOC()){
 }
 
 
-header('Content-Type: application/json');
-echo json_encode([
-    "status" => "success",
-    "message" => $grouped
-]);
-
 ?>

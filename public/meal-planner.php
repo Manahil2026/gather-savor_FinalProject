@@ -1,6 +1,34 @@
 <?php
 require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session check to make sure user is logged in.
-$meal_plan = require __DIR__ . '/../src/recipes/loadMealPlan.php'; //Load meal plan data
+require_once __DIR__ . '/../src/messages.php';
+
+
+if($_SERVER['REQUEST_METHOD'] === "POST"){
+	if(!isset($_POST['action'])){
+		error_message("Action not set");
+		exit;
+	}
+
+
+	$action = $_POST['action'];
+	switch($action){
+		
+		case "get-mealplan":
+			require_once __DIR__ . "/../src/recipes/loadMealPlan.php";
+			break;
+		
+		case "delete-recipe":
+			require_once __DIR__ . "/../src/recipes/removeMealPlan.php";
+			break;
+		default: 
+		
+		
+		error_message("Action not valid");
+		exit;
+	}
+}
+
+$meal_plan;
 ?>
 
 <!DOCTYPE html>
@@ -9,10 +37,15 @@ $meal_plan = require __DIR__ . '/../src/recipes/loadMealPlan.php'; //Load meal p
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Gather & Savor | Meal Planner</title>
-	<link rel="stylesheet" href="style.css">
-	<script defer src="app.js"></script> <!-- Instead of app.js meal-planner.js will come here which will fetch the recipe titles from the API and render them --> 
+	<link rel="stylesheet" href="assets/css/toast.css">
+	<link rel="stylesheet" href="assets/css/header.css">
+  	<link rel="stylesheet" href="assets/css/style.css">
+
 </head>
 <body>
+	<div class="toast">
+		<p>Successfully removed! </p>
+	</div>
 	<header>
 		<nav class="main-nav">
 			<div class="logo">
@@ -36,46 +69,77 @@ $meal_plan = require __DIR__ . '/../src/recipes/loadMealPlan.php'; //Load meal p
 		</section>
 
 		<section class="meal-planner-grid">
-			<?php 
-				$days = [
-					'monday' => 'Monday',
-					'tuesday' => 'Tuesday',
-					'wednesday' => 'Wednesday',
-					'thursday' => 'Thursday',
-					'friday' => 'Friday',
-					'saturday' => 'Saturday',
-					'sunday' => 'Sunday'
-				];
-
-				foreach($days as $key => $label): 
-					$recipeId = $meal_plan[$key] ?? null;
 			
-			?>
+			<div id="monday" class="day-column">
+				<h2>Monday</h2>
+				<div class="day-slot">
+					<ul class="plan-list">
 
-			<div class = 'day-column'>
-				<h2><?= $label ?></h2>
+					</ul>
+				</div>
+			</div>
+			
 
-				<div class = "day-slot"
-					data-day="<?= $key ?>"
-					data-recipe-id="<?= $recipeId ? htmlspecialchars($recipeId) : '' ?>"
-				>
-
-					<?php if($recipeId): ?>
-						<!-- Placeholder until API loads via JS -->
-						<p class = "loading-text">Loading recipes...</p>
-					<?php else: ?>
-						<p class="placeholder-text">No recipe assigned.</p>
-					<?php endif; ?>
-
+			<div id="tuesday" class="day-column">
+				<h2>Tuesday</h2>
+				<div class="day-slot">
+					<ul class="plan-list">
+						
+					</ul>
 				</div>
 			</div>
 
-			<?php endforeach; ?>
+
+			<div id="wednesday" class="day-column">
+				<h2>Wednesday</h2>
+				<div class="day-slot">
+					<ul class="plan-list">
+
+					</ul>
+				</div>
+			</div>
+
+			<div id="thursday" class="day-column">
+				<h2>Thursday</h2>
+				<div class="day-slot">
+					<ul class="plan-list">
+
+					</ul>
+				</div>
+			</div>
+
+			<div id="friday" class="day-column">
+				<h2>Friday</h2>
+				<div class="day-slot">
+					<ul class="plan-list">
+
+					</ul>
+				</div>
+			</div>
+			
+			<div id="saturday" class="day-column">
+				<h2>Saturday</h2>
+				<div class="day-slot">
+					<ul class="plan-list">
+
+					</ul>
+				</div>
+			</div>
+
+			<div id="sunday" class="day-column">
+				<h2>Sunday</h2>
+				<div class="day-slot">
+					<ul class="plan-list">
+
+					</ul>
+				</div>
+			</div>
 
 
 		</section>
 		
 	</main>
+	<script src="assets/js/mealPlanner.js"></script>
 </body>
 </html>
 	

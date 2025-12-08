@@ -7,8 +7,9 @@ require_once __DIR__ . '/php/auth/checkSession.php'; // Include the session chec
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Gather & Savor | Recipes</title>
-	<script defer src="app.js"></script>
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="recipe-cards.css">
+	<script defer src="js/recipes.js"></script>
 </head>
 <body>
 	<header>
@@ -51,6 +52,5 @@ require_once __DIR__ . '/php/auth/checkSession.php'; // Include the session chec
 			<p class="placeholder-text">Search for a recipe to see results here.</p>
 		</section>
 	</main>
-	<script src="js/recipes.js"></script>
 </body>
 </html>

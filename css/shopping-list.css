@@ -12,7 +12,7 @@
 .page-header {
   text-align: center;
   padding: 2rem 1rem;
-  background: linear-gradient(135deg, #4b2b1b 0%, #FF7518 45%, #D7942D 100%);
+  /* background: linear-gradient(135deg, #4b2b1b 0%, #FF7518 45%, #D7942D 100%); */
   color: #cb997e;
   border-radius: 12px 12px 0 0;
   margin: -2rem -1rem 0 -1rem;
@@ -21,6 +21,7 @@
 .page-header p {
   font-size: 1.1rem;
   opacity: 0.9;
+  margin: 0; color: #555;
 }
 
 .placeholder-text {
@@ -230,6 +231,7 @@
 
 .page-header h1 {
   font-size: 1.8rem;
+  margin: 0 0 0.25rem;
 }
 
 .group-header {
@@ -256,6 +258,7 @@ button {
   display: none;
   }
 }
+
 
 
 

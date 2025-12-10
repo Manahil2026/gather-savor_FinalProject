@@ -87,9 +87,12 @@ function requestRemove(event){
             const listContent = document.createElement('div');
             const link = document.createElement('a');
             const removeButton = document.createElement('button');
+            removeButton.classList = "btn secondary-btn";
+            removeButton.style = "margin-left: 20px;"
+            
 
 
-            link.classList = "recipe-item";
+            link.classList = "recipe-item btn primary-btn";
             link.id = recipe_id;
             link.textContent = recipe_title;
             link.href = `http://final.domain.local/recipe-details.php?recipe_id=${recipe_id}`;

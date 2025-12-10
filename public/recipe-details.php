@@ -129,11 +129,11 @@
 			<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: center">
 
 				<!--Favorites button (change w/ javascript?)-->
-				<button id="toggleFavorite">Add Favorite</button>
+				<button class = "btn primary-btn" id="toggleFavorite">Add Favorite</button>
 
-				<button id="showModal">Add to meal plan</button>
+				<button class = "btn primary-btn" id="showModal">Add to meal plan</button>
 
-				<button id="toggleShoppingList">Add to Shopping List</button>
+				<button class = "btn primary-btn" id="toggleShoppingList">Add to Shopping List</button>
 
 			</div>
 		</section>

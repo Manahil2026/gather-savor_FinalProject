@@ -91,8 +91,13 @@ function populateRecipes(recipes){
                 recipeCard.classList = "recipe-card";
                 titleElement.textContent = title;
                 imageElement.src =  image;
+                imageElement.style="max-width: 500px; max-height: 500px"
                 removeBtn.textContent = "Remove this Recipe";
+                removeBtn.classList = "btn primary-btn";
+                removeBtn.style="max-width: 200px"
                 removeBtn.addEventListener('click', sendRemoveRequest);
+
+                recipeCard.style="display:flex; flex-direction: column; gap: 20px"
 
                 recipeCard.appendChild(titleElement);
                 recipeCard.appendChild(imageElement);

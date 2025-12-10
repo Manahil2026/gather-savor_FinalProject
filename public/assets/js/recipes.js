@@ -48,9 +48,9 @@ function populateRecipes(recipes){
 
             newArticle.appendChild(newImage);
             newArticle.appendChild(newH3);
-            newArticle.appendChild(newP);
+            //newArticle.appendChild(newP);
             newDiv.appendChild(newA);
-            newDiv.appendChild(newBtn);
+            //newDiv.appendChild(newBtn);
             newArticle.appendChild(newDiv)
 
             recipeResultsSection.appendChild(newArticle);

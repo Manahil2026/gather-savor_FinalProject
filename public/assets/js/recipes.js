@@ -18,40 +18,62 @@ function populateRecipes(recipes){
     recipes['results'].forEach(recipe => {
     
     
+            /*
+            <article class="recipe-card">
+				<img src="assets/images/pumpkin-soup.jpg" alt="Recipe name">
+				<h3 class="recipe-card-title">Cozy Pumpkin Soup</h3>
+				<p class="recipe-card-meta">30 mins . 4 servings</p>
+				<div class="recipe-card-actions" style="display: block;">
+					<a href="recipe.php?id=1" class="btn primary-btn">View Recipe</a>
+					<button class="btn secondary-btn">Favorites</button>
+				</div>
+			</article>
 
-            //html
+
+            */
+
             const recipe_id = recipe['id'];
             const image = recipe['image'];
             const recipeTitle = recipe['title'];
-     
 
-            const recipeDiv = document.createElement('div');
-            const imageElement = document.createElement('img');
-            const recipeTitleElement = document.createElement('p');
+            const newArticle = document.createElement('article');
+            const newImage = document.createElement('img');
+            const newH3 = document.createElement('h3');
+            const newP = document.createElement('p');
+            const newDiv = document.createElement('div');
+            const newA = document.createElement('a');
             const newBtn = document.createElement('button');
-            
-
-            recipeDiv.id = recipe_id;
-            imageElement.src = image;
-            recipeTitleElement.textContent = recipeTitle;
-            recipeTitleElement.classList = "recipe-title";
-            imageElement.addEventListener('click', getRecipeDetails);
-
-            //Temporary styling
-            recipeDiv.style= "text-align: center";
 
 
-            recipeDiv.appendChild(recipeTitleElement);
-            recipeDiv.appendChild(imageElement);
-            recipeDiv.appendChild(newBtn);
-            recipeResultsSection.appendChild(recipeDiv);
+
+            newArticle.classList = "recipe-card"
+            newArticle.id = recipe_id;
+            newImage.src = image;
+            newH3.textContent =  recipeTitle;
+            newP.textContent = "Placeholder" //Servings, prep time
+            newDiv.classList = "recipe-card-actions"
+            newDiv.style.display = "block";
+            newA.href = `http://localhost/recipe-details.php?recipe_id=${recipe_id}`;
+            newA.textContent = "View Recipe";
+            newA.classList = "btn primary-btn";
+            newBtn.classList = "btn secondary-btn";
+            newBtn.textContent = "Favorite";
+
+            newArticle.appendChild(newImage);
+            newArticle.appendChild(newH3);
+            newArticle.appendChild(newP);
+            newDiv.appendChild(newA);
+            newDiv.appendChild(newBtn);
+            newArticle.appendChild(newDiv)
+
+            recipeResultsSection.appendChild(newArticle);
     })
 }
 
 
 
 function search(clickEvent){
-    const recipes = document.getElementById('recipe-results').querySelectorAll('div');
+    const recipes = document.getElementById('recipe-results').querySelectorAll('article');
     //Don't refresh the page
     clickEvent.preventDefault()
 
@@ -70,7 +92,7 @@ function search(clickEvent){
 function testFoodName(card){
     const searchBox = document.getElementById('search-box');
     //Filter for the search box
-    const foodName = card.querySelector('.recipe-title').textContent
+    const foodName = card.querySelector('.recipe-card-title').textContent
     const searchExpression = new RegExp(".*" + searchBox.value + ".*", "i")
     if(searchBox.value != ""){
         if(!searchExpression.test(foodName)){

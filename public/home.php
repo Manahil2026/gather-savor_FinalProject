@@ -16,7 +16,7 @@ require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session c
   <header>
     <nav class="main-nav">
       <div class="logo">
-        <a href="Home.php">Gather & Savor</a>
+        <a href="home.php">Gather & Savor</a>
       </div>
       <ul class="nav-links">
         <li><a href="home.php" class="active">Home</a></li>

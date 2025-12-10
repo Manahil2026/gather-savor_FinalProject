@@ -49,7 +49,7 @@ $meal_plan;
 	<header>
 		<nav class="main-nav">
 			<div class="logo">
-				<a href="Home.php">Gather & Savor</a>
+				<a href="home.php">Gather & Savor</a>
 			</div>
 			<ul class="nav-links">
 				<li><a href="home.php">Home</a></li>

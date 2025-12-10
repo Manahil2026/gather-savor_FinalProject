@@ -1,1 +1,0 @@
-//Just grab hte favs from the database and throw it on the page. Probably don't even need js for this.

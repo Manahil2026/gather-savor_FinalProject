@@ -48,7 +48,7 @@ require_once __DIR__ . "/../src/auth/handleRegister.php";
       <?php endif; ?>
 
 
-      <form id="register-form" method="post" action="Register.php">
+      <form id="register-form" method="post" action="register.php">
         <div class="form-group">
           <label for="reg-name">Name</label>
           <input type="text" id="reg-name" name="name" required>

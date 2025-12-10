@@ -40,19 +40,19 @@ require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session c
       <article class="home-card">
         <h2>Weekly Meal Planner</h2>
         <p>Drag and drop or assign recipes to each day of the week.</p>
-        <a href="meal-planner.php" class="link">Open Meal Planner</a>
+        <a href="meal-planner.php" class="btn primary-btn">Open Meal Planner</a>
       </article>
 
       <article class="home-card">
         <h2>Favorites</h2>
         <p>Save your go-to recipes and access them quickly.</p>
-        <a href="favorites.php" class="link">View Favorites</a>
+        <a href="favorites.php" class="btn primary-btn">View Favorites</a>
       </article>
 
       <article class="home-card">
         <h2>Shopping List</h2>
         <p>Automatically build a grocery list based on your selected recipes.</p>
-        <a href="shopping-list.php" class="link">View Shopping List</a>
+        <a href="shopping-list.php" class="btn primary-btn">View Shopping List</a>
       </article>
     </section>
   </main>

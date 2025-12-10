@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../db.php'; //Include db connection file
 require_once __DIR__ . '/../messages.php'; 
 
+//The point of this file is to tell the client if the specified recipe is already in the shopping list
 
 try{
     $user_id = $_SESSION['user_id']; //Get user id from session

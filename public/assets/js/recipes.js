@@ -18,20 +18,6 @@ function populateRecipes(recipes){
     recipes['results'].forEach(recipe => {
     
     
-            /*
-            <article class="recipe-card">
-				<img src="assets/images/pumpkin-soup.jpg" alt="Recipe name">
-				<h3 class="recipe-card-title">Cozy Pumpkin Soup</h3>
-				<p class="recipe-card-meta">30 mins . 4 servings</p>
-				<div class="recipe-card-actions" style="display: block;">
-					<a href="recipe.php?id=1" class="btn primary-btn">View Recipe</a>
-					<button class="btn secondary-btn">Favorites</button>
-				</div>
-			</article>
-
-
-            */
-
             const recipe_id = recipe['id'];
             const image = recipe['image'];
             const recipeTitle = recipe['title'];
@@ -50,6 +36,7 @@ function populateRecipes(recipes){
             newArticle.id = recipe_id;
             newImage.src = image;
             newH3.textContent =  recipeTitle;
+            newH3.classList = "recipe-card-title";
             newP.textContent = "Placeholder" //Servings, prep time
             newDiv.classList = "recipe-card-actions"
             newDiv.style.display = "block";
@@ -71,6 +58,8 @@ function populateRecipes(recipes){
 }
 
 
+
+//Does the searching
 
 function search(clickEvent){
     const recipes = document.getElementById('recipe-results').querySelectorAll('article');
@@ -105,33 +94,3 @@ function testFoodName(card){
 
 
 searchButton.addEventListener("click", search)
-
-//Apply a button to every food, get its ID and send the client to recipe-details
-
-
-/*
-const recipeData = document.querySelector("#recipe-results");
-
-const foods = recipeData.querySelectorAll('.food-item');
-
-
-
-
-foods.forEach(food => {
-    const newBtn = document.createElement('button');
-    newBtn.textContent = "Get Details"
-    food.appendChild(newBtn);
-    
-    newBtn.addEventListener('click', getRecipeDetails);
-
-
-})
-
-
-function getRecipeDetails(event){
-    const id = event.target.closest("div").id;
-    window.location.href = `http://localhost/recipe-details.php?recipe_id=${id}`;
-}
-
-
-*/

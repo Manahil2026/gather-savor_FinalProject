@@ -25,14 +25,14 @@ try{
             'recipe_id' => $recipe_id
         ]);
         
-        success_message("Successfully removed from shopping list");
+        success_message("removed");
         exit;
     }
 
     $stmt = $conn->prepare("INSERT INTO  shopping_lists (user_id, recipe_id) VALUES (?,?)");
     $stmt->execute([$user_id,$recipe_id]);
 
-    success_message("Successfully added to shopping list");
+    success_message("added");
 }
 catch(PDOException $e){
     error_message($e);

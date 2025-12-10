@@ -18,12 +18,13 @@ require_once __DIR__ . '/../src/messages.php';
         case "get-shoppingIngredients":
           include __DIR__ . '/../src/shopping-list/getIngredientsList.php';
           break;
-      case "add-ingredient":
-        include __DIR__ . '/../src/shopping-list/addIngredient.php';
+
+      case "toggle-ingredient":
+        include __DIR__ . '/../src/shopping-list/toggleIngredient.php';
         break;
 
-      case "remove-ingredient":
-        include __DIR__ . '/../src/shopping-list/removeIngredient.php';
+      case "checkIngredient.php": //In the future, I don't want a whole separate request to handle whether or not a strikethrough or a star should be lit up
+        include __DIR__ . '/../src/shopping-list/checkIngredient.php';
         break;
 
       default: 
@@ -44,9 +45,15 @@ require_once __DIR__ . '/../src/messages.php';
 	<link rel="stylesheet" href="assets/css/header.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/shopping-list.css">
+  <link rel="stylesheet" href="assets/css/toast.css">
   <script defer src="app.js"></script> <!-- app.js will be replaced with shopping-list.js which will provoide logic for rendering ingredients from api -->
 </head>
 <body>
+
+  <div class="toast">
+		<p>Successfully added to favorites!</p>
+	</div>
+  
   <header>
     <nav class="main-nav">
       <div class="logo">

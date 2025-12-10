@@ -6,6 +6,8 @@ const modalBtn = document.getElementById('showModal');
 const closeModalBtn = document.getElementById('close modal');
 modalBtn.addEventListener('click',toggleModal);
 closeModalBtn.addEventListener('click', toggleModal);
+
+
 const toggleFavoriteBtn = document.getElementById('toggleFavorite');
 const toggleShoppingListBtn = document.getElementById('toggleShoppingList');
 
@@ -229,7 +231,6 @@ function populateRecipeDetails(recipe){
 
 
     //shopping-list button
-    
     toggleShoppingListBtn.addEventListener('click', toggleShoppingListRequest);
 }
 

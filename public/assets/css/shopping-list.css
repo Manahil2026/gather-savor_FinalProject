@@ -3,40 +3,39 @@
 .shopping-list-container {
   max-width: 800px;
   margin: 2rem auto;
-  padding: 0 1rem;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 0 1rem 2rem;
+  background: #d3b58b;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(122, 74, 47);
 }
 
 .page-header {
   text-align: center;
   padding: 2rem 1rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  /* background: linear-gradient(135deg, #4b2b1b 0%, #FF7518 45%, #D7942D 100%); */
+  color: #cb997e;
   border-radius: 12px 12px 0 0;
   margin: -2rem -1rem 0 -1rem;
 }
 
 .page-header p {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   opacity: 0.9;
-  margin: 0;
+  margin: 0; color: #555;
 }
 
 .placeholder-text {
   text-align: center;
   padding: 4rem 2rem;
-  color: #666;
-  font-size: 1.1rem;
+  color: #bc6c25;
+  font-size: 1.05rem;
   font-style: italic;
 }
 
 .placeholder-text::before {
-  content: "🛒";
+  content: "🧺";
   display: block;
-  font-size: 4rem;
-  margin-bottom: 1rem;
+  font-size: 1rem;
   animation: bounce 2s infinite;
 }
 
@@ -120,7 +119,7 @@
   width: 20px;
   height: 20px;
   margin-right: 1rem;
-  accent-color: #667eea;
+  accent-color: #e76f51;
   cursor: pointer;
 }
 
@@ -232,6 +231,7 @@
 
 .page-header h1 {
   font-size: 1.8rem;
+  margin: 0 0 0.25rem;
 }
 
 .group-header {
@@ -258,4 +258,9 @@ button {
   display: none;
   }
 }
+
+
+
+
+
 

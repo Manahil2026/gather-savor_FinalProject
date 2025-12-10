@@ -7,9 +7,9 @@
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlankMacSystemFont, "Times New Roman", sans-serif;
-  background: #f7f5f2;
-  color: #222;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Times New Roman", sans-serif;
+  background: #f5eee5;
+  color: #2b1b12;
 }
 
 .page-container {
@@ -122,3 +122,5 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+

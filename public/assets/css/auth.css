@@ -3,27 +3,31 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f7f5f2;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Times New Roman", sans-serif;
+  background: #e0b782;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Times New Roman", sans-serif,
 }
 
 .auth-card {
-  background: #fff;
-  width: 100%;
-  max-width: 420px;
-  padding: 2rem 2.25rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  background: #fac170;
+  width: 320px; /* narrow, tall card */
+  padding: 1.75rem 1.5rem;
+  border-radius: 24px; /* make this bigger for rounder edges */
+  border: 1px solid #cf8a29; /* thin border */
+  box-shadow: 0 8px 24px rgba(94, 65, 24);
 }
 
 .auth-card h1 {
-  margin: 0 0 0.5rem;
-  font-size: 1.6rem;
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  text-align: center;
+  font-size: 1.4rem;
+  letter-spacing: 0.04rem;
+  color: #cf8a29;
 }
 
 .auth-card p.subtext {
   margin: 0 0 1.5rem;
-  color: #666;
+  color: #723c14;
   font-size: 0.95rem;
 }
 
@@ -43,14 +47,14 @@
   width: 100%;
   padding: 0.55rem 0.7rem;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #7d472a;
   font-size: 0.95rem;
 }
 
 .auth-form input:focus {
   outline: none;
-  border-color: #ff7e3d;
-  box-shadow: 0 0 0 2px rgba(255, 126, 61, 0.25);
+  border-color: #ed9352;
+  box-shadow: 0 0 0 2px rgba(237, 147, 82);
 }
 
 .auth-actions {
@@ -64,7 +68,7 @@
   border: none;
   border-radius: 999px;
   padding: 0.6rem 1.2rem;
-  background: #ff7e3d;
+  background: #ed9352;
   color: #fff;
   font-weight: 500;
   cursor: pointer;
@@ -72,13 +76,13 @@
 }
 
 .auth-btn-primary:hover {
-  background: #ff945f;
+  background: #ffb464;
 }
 
 .auth-btn-secondary {
   border: none;
   background: transparent;
-  color: #555;
+  color: #bb6d3e;
   font-size: 0.9rem;
   cursor: pointer;
   text-decoration: underline;
@@ -98,3 +102,7 @@
 }
 
   
+
+
+
+

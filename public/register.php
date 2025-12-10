@@ -72,7 +72,7 @@ require_once __DIR__ . "/../src/auth/handleRegister.php";
         <button type="submit" class="btn primary-btn">Register</button>
       </form>
       <p class="auth-switch">
-        Already have an account? <a href="Login.php">Log in here.</a>
+        Already have an account? <a href="login.php">Log in here.</a>
       </p>
     </section>
   </main>

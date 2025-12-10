@@ -43,6 +43,7 @@ require_once __DIR__ . '/../src/messages.php';
   <title>Gather & Savor | Shopping List</title>
 	<link rel="stylesheet" href="assets/css/header.css">
 	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="assets/css/shopping-list.css">
   <script defer src="app.js"></script> <!-- app.js will be replaced with shopping-list.js which will provoide logic for rendering ingredients from api -->
 </head>
 <body>

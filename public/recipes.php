@@ -11,6 +11,7 @@ require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session c
 	<title>Gather & Savor | Recipes</title>
 	<link rel="stylesheet" href="assets/css/header.css">
 	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="assets/css/shopping-list.css">
 </head>
 <body>
 	<header>
@@ -44,7 +45,10 @@ require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session c
 
 		<!-- Populate-->
 		<section id="recipe-results" class="card-grid" style="display: flex; gap: 20px; flex-wrap: wrap; padding: 20px; justify-content: center; align-items: center;">
-
+			<div>
+				<img src="assets/images/pumpkin-soup.jpg" alt="Recipe name">
+				<p class="recipe-card-meta">Pumpkin Soup</p>
+			</div>
 	
 		</section>
 	</main>

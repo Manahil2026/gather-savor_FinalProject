@@ -48,7 +48,7 @@ require_once __DIR__ . '/php/auth/checkSession.php'; // Include the session chec
 		<!-- Populate-->
 		<section id="recipe-results" class="card-grid">
 			<article class="recipe-card">
-				<img src="images/pumpkin-soup.jpg" alt="Recipe name">
+				<img src="css/images/pumpkin-soup.jpg" alt="Recipe name">
 				<h3 class="recipe-card-title">Cozy Pumpkin Soup</h3>
 				<p class="recipe-card-meta">30 mins . 4 servings</p>
 				<div class=recipe-card-actions">

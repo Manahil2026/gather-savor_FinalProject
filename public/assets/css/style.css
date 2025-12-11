@@ -116,6 +116,59 @@ body {
 #search-filter {
   flex: 0 0 180px;
 }
+ 
+.home-grid{ /* So this is for the home page I want the features to be in a grid layout */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Always love this repeat function, saves me ton of time */
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.home-card{ /* Now I am designing the cards for the features, it will look pretty clean thsi way */
+  background: #fff2e0;
+  padding: 1.5rem;
+  border-radius: 18px;
+  border: 1px solid #ffb078;
+  box-shadow: 0 4px 12px rgba(150, 100, 50, 0.15); /* box shadow will make it looks like its floating */
+  transition: transform 0.15s ease, box-shadow 0.15s ease; /* This transition is for the hover effect, it will make the card look more interactive */
+}
+
+.home-card:hover { /* This is the hover effect, so basically when you hover over the card, it will move up a little bit */
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(150, 100, 50, 0.25);
+}
+
+.home-card h2 { 
+  margin-top: 0;
+  color: #8a4b17;
+}
+
+.home-card p {
+  color: #6a3c18;
+  margin-bottom: 1rem;
+}
+
+.hero { /* I wanna center the hero section so that with the cards it will look more balanced */
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+.hero h1 {
+  font-size: 2.3rem;
+  margin-bottom: 0.5rem;
+  color: #8a4b17;
+}
+
+.hero p {
+  max-width: 500px;
+  margin: 0 auto 1.5rem;
+  color: #6a3c18;
+}
+
+.hero .btn {
+  margin-top: 0.5rem;
+}
+
 
 @media (max-width: 768px) {
   .recipe-columns {

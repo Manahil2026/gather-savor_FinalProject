@@ -3,49 +3,59 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #e0b782;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Times New Roman", sans-serif,
+  background: #f5eee5;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .auth-card {
   background: #fac170;
-  width: 320px; /* narrow, tall card */
-  padding: 1.75rem 1.5rem;
+  width: 340px; /* narrow, tall card */
+  padding: 2rem 1.7rem;
   border-radius: 24px; /* make this bigger for rounder edges */
   border: 1px solid #cf8a29; /* thin border */
-  box-shadow: 0 8px 24px rgba(94, 65, 24);
+  box-shadow: 0 8px 24px rgba(94, 65, 24, 0.4);
 }
 
 .auth-card h1 {
-  margin-top: 0;
-  margin-bottom: 1.25rem;
+  margin: 0 0 1.3rem;
   text-align: center;
-  font-size: 1.4rem;
-  letter-spacing: 0.04rem;
-  color: #cf8a29;
+  font-size: 1.5rem;
+  color: #8a4b17;
 }
 
-.auth-card p.subtext {
-  margin: 0 0 1.5rem;
-  color: #723c14;
-  font-size: 0.95rem;
+.alert {
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  font-size:0.9rem;
+}
+
+.alert.error{
+  background: #ffebe8;
+  border-left: 3px solid #d9534f;
+  color: #a94442;
+}
+
+.alert.success{
+  background: #e6ffed;
+  border-left: 3px solid #2ecc71;
+  color: #1e8449;
 }
 
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  gap: 1rem;
 }
 
 .auth-form label {
   font-size: 0.9rem;
-  margin-bottom: 0.15rem;
-  display: block;
+  font-weight: 500;
+  color: #6a3c18;
 }
 
 .auth-form input {
-  width: 100%;
-  padding: 0.55rem 0.7rem;
+  padding: 0.6rem 0.8rem;
   border-radius: 8px;
   border: 1px solid #7d472a;
   font-size: 0.95rem;
@@ -54,50 +64,45 @@
 .auth-form input:focus {
   outline: none;
   border-color: #ed9352;
-  box-shadow: 0 0 0 2px rgba(237, 147, 82);
+  box-shadow: 0 0 0 2px rgba(237, 147, 82, 0.4);
 }
 
 .auth-actions {
-  margin-top: 1.1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
+  margin-top: 0.7rem;
 }
 
 .auth-btn-primary {
+  width: 100%;
   border: none;
   border-radius: 999px;
-  padding: 0.6rem 1.2rem;
+  padding: 0.7rem;
   background: #ed9352;
   color: #fff;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 .auth-btn-primary:hover {
   background: #ffb464;
 }
 
-.auth-btn-secondary {
-  border: none;
-  background: transparent;
-  color: #bb6d3e;
+.auth-switch{
+  margin-top: 1.2rem;
   font-size: 0.9rem;
-  cursor: pointer;
-  text-decoration: underline;
+  text-align: center;
+  color: #6a3c18;
 }
 
-.auth-error {
-  margin-top: 0.5rem;
-  font-size: 0.85rem;
-  color: #b00020;
+.auth-switch a {
+  color: #8c451b;
+  text-decoration: underline;
 }
 
 @media (max-width: 480px) {
   .auth-card {
     margin: 1rem;
-    padding: 1.6rem 1.4rem;
+    width: 90%;
   }
 }
 

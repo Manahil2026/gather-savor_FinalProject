@@ -10,28 +10,11 @@ require_once __DIR__ . "/../src/auth/handleRegister.php";
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gather & Savor | Register</title>
-	<link rel="stylesheet" href="assets/css/header.css">
-	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="assets/css/auth.css">
 </head>
-<body>
-  <header>
-    <nav class="main-nav">
-      <div class="logo">
-        <a href="home.php">Gather & Savor</a>
-      </div>
-      <ul class="nav-links">
-        <li><a href="home.php">Home</a></li>
-        <li><a href="recipes.php">Recipes</a></li>
-        <li><a href="meal-planner.php">Meal Planner</a></li>
-        <li><a href="favorites.php">Favorites</a></li>
-        <li><a href="shopping-list.php">Shopping List</a></li>
-        <li><a href="login.php">Login</a></li>
-        <li><a href="register.php" class="active">Register</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <main class="page-container auth-page">
+<body class="auth-page">
+
     <section class="auth-card">
       <h1>Create an Account</h1>
 
@@ -48,33 +31,37 @@ require_once __DIR__ . "/../src/auth/handleRegister.php";
       <?php endif; ?>
 
 
-      <form id="register-form" method="post" action="register.php">
-        <div class="form-group">
-          <label for="reg-name">Name</label>
-          <input type="text" id="reg-name" name="name" required>
-        </div>
+      <form class="auth-form" method="post" action="register.php">
+        
+          <label >Name</label>
+          <input type="text"  name="name" required>
+        
 
-        <div class="form-group">
-          <label for="reg-email">Email</label>
-          <input type="email" id="reg-email" name="email" required>
-        </div>
+       
+          <label >Email</label>
+          <input type="email" name="email" required>
+       
 
-        <div class="form-group">
-          <label for="reg-password">Password</label>
-          <input type="password" id="reg-password" name="password" required>
-        </div>
+        
+          <label>Password</label>
+          <input type="password"  name="password" required>
+        
 
-        <div class="form-group">
-          <label for="reg-confirm">Confirm Password</label>
-          <input type="password" id="reg-confirm" name="confirm_password" required>
-        </div>
+        
+          <label>Confirm Password</label>
+          <input type="password" name="confirm_password" required>
+        
+      <div class="auth-actions">
+        <button type="submit" class="auth-btn-primary">Register</button>
+      </div>
 
-        <button type="submit" class="btn primary-btn">Register</button>
       </form>
+
       <p class="auth-switch">
-        Already have an account? <a href="login.php">Log in here.</a>
+        Already have an account? <a href="login.php">Log in here</a>
       </p>
+    
     </section>
-  </main>
+  
 </body>
 </html>

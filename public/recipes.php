@@ -10,8 +10,8 @@ require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session c
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Gather & Savor | Recipes</title>
 	<link rel="stylesheet" href="assets/css/header.css">
-	<link rel="stylesheet" href="assets/css/style.css">
-	<link rel="stylesheet" href="assets/css/shopping-list.css">
+	<link rel="stylesheet" href="assets/css/recipe-cards.css">
+	
 </head>
 <body>
 	<header>
@@ -37,9 +37,9 @@ require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session c
 		</section>
 
 		<section class="search-section">
-			<form>
+			<form id="recipe-search-form">
 				<input type="text" id="search-box" placeholder="Search recipes..." required>
-				<button id="search-button" type="submit" class="btn primary-btn">Search</button>
+				<button id="search-button" type="submit" class="btn secondary-btn">Search</button>
 			</form>
 		</section>
 

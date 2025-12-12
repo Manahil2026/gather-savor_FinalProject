@@ -43,10 +43,11 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Gather & Savor | Recipe Details</title>
+	<link rel="stylesheet" href="assets/css/recipe-cards.css">
 	<link rel="stylesheet" href="assets/css/toast.css"> 
 	<link rel="stylesheet" href="assets/css/modal.css">
 	<link rel="stylesheet" href="assets/css/header.css">
-	<link rel="stylesheet" href="assets/css/style.css">
+	
 </head>
 <body>
 

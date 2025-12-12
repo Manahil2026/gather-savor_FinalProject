@@ -8,8 +8,8 @@
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Times New Roman", sans-serif;
-  background: #f7f5f2;
-  color: #222;
+  background: #f5eee5;
+  color: #2b1b12;
 }
 
 .page-container {
@@ -21,8 +21,7 @@ body {
 .page-header {
   text-align: center;
   padding: 2rem 1rem;
-  /* background: linear-gradient(135deg, #4b2b1b 0%, #FF7518 45%, #D7942D 100%); */
-  color: #cb997e;
+  color: #8a4b17;
   border-radius: 12px 12px 0 0;
   margin: -2rem -1rem 0 -1rem;
 }
@@ -30,7 +29,7 @@ body {
 .page-header p {
   font-size: 1.1rem;
   opacity: 0.9;
-  margin: 0; color: #555;
+  margin: 0; color: #6a3c18;
 }
 
 .btn {
@@ -74,7 +73,8 @@ body {
 #recipe-search-form {
   width: 100%;
   max-width: 800px;
-  background: #f0e7dd;
+  background: #fff2e0;
+  border: 1px solid #ffb078;
   padding: 1rem 1.2rem;
   border-radius: 16px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.06);
@@ -189,7 +189,8 @@ body {
 }
 
 .recipe-card {
-  background: #ece1d3;
+  background: #fff2e0;
+  border: 1px solid #ffb078;
   border-radius: 18px;
   padding: 1.2rem;
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);

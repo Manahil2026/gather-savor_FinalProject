@@ -44,11 +44,8 @@ require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session c
 		</section>
 
 		<!-- Populate-->
-		<section id="recipe-results" class="card-grid" style="display: flex; gap: 20px; flex-wrap: wrap; padding: 20px; justify-content: center; align-items: center;">
-			
-
-	
-		</section>
+		<section id="recipe-results" class="card-grid"></section>
+		
 	</main>
 	<script src="assets/js/recipes.js"></script>
 </body>

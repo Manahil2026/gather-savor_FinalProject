@@ -3,9 +3,10 @@ const recipe_id = document.getElementById('recipe_id');
 
 //Initial setup
 const modalBtn = document.getElementById('showModal');
-const closeModalBtn = document.getElementById('close modal');
+const closeModalBtn = document.getElementById('close-modal');
 modalBtn.addEventListener('click',toggleModal);
 closeModalBtn.addEventListener('click', toggleModal);
+document.getElementById('modal-backdrop').addEventListener('click', toggleModal);
 
 
 const toggleFavoriteBtn = document.getElementById('toggleFavorite');
@@ -26,7 +27,18 @@ if(recipe_id.value !== ""){
 //Togglemodal and showtoast are for css
 function toggleModal(){
     const modal = document.querySelector('#modal');
-    modal.classList == "modal-hidden" ? modal.classList = "modal-visible" : modal.classList = "modal-hidden";
+    const backdrop = document.querySelector('#modal-backdrop');
+
+    const isHidden = modal.classList.contains('modal-hidden');
+
+    if (isHidden){
+        modal.classList = 'modal-visible';
+        backdrop.classList = 'modal-backdrop-visible';
+    }
+    else{
+        modal.classList = 'modal-hidden';
+        backdrop.classList = 'modal-backdrop-hidden';
+    }
 }
 
 

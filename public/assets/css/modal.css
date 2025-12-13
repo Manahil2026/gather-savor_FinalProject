@@ -1,28 +1,90 @@
-.modal-hidden{
-    padding: 40px;
-    display: none;
-    background: gray;
+.modal-backdrop-visible{
     position: fixed;
-    bottom: 50%;
-    left: 50%;
-    transform: translate(-50%, 50%);
-    border-radius: 10px;
-    z-index: 990
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(6px);
+    z-index: 980;
 }
 
+.modal-backdrop-hidden{
+    display: none;
+}
+
+.modal-hidden,
+.modal-visible{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 18px;
+    padding: 2rem 2.5rem;
+    max-width: 420px;
+    width: 90%;
+    z-index: 990;
+
+}
+
+.modal-hidden{
+    display: none;
+}
 
 .modal-visible{
-    padding: 40px;
     display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    background: gray;
-    position: fixed;
-    bottom: 50%;
-    left: 50%;
-    transform: translate(-50%, 50%);
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: stretch;
+    background: #fff7ee;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    animation: modalFadeIn 0.25s ease-out;
+}
+
+.modal-visible label{
+    font-size: 1rem;
+    font-weight: 600;
+    color: #3a1f0f;
+}
+
+.modal-visible select{
+    padding: 0.6rem 0.8rem;
     border-radius: 10px;
-    z-index: 990
+    border: 1px solid #d6c6b8;
+    font-size: 0.95rem;
+    background: #fff;
+}
+
+.modal-visible select:focus{
+    outline:none;
+    border-color: #ff7e3d;
+    box-shadow: 0 0 0 3px rgba(255,126,61,0.28);
+}
+
+.modal-actions{
+    display: flex;
+    gap:0.75rem;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+}
+
+.modal-close{
+    background: transparent;
+    border:none;
+    color: #8a4b17;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    text-decoration: underline;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
 }

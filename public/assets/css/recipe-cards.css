@@ -114,79 +114,9 @@ body {
   font-family: "Times New Roman", serif;
 }
 
-.recipe-details {
-  margin-top: 1.5rem;
-}
+/* Changed the ordering of the code that is why pasted from the bottom and put here */
 
-.recipe-main {
-  margin-bottom: 1.8rem;
-  background: #fff;
-  padding: 1.5rem;
-  border-radius: 20px;
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.06);
-}
-
-.recipe-title,
-#recipe-title {
-  margin: 0;
-}
-
-.recipe-image {
-  width: 100%;
-  max-height: 380px;
-  object-fit: cover;
-  border-radius: 24px;
-  margin-top: 0.9rem;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
-}
-
-.recipe-summary {
-  margin-top: 0.75rem;
-  color: #555;
-}
-
-.recipe-columns {
-  display: grid;
-  grid-template-columns: 1.1fr 1.3fr;
-  gap: 2rem;
-  align-items: flex-start;
-  margin-top: 1.5rem;
-  background: #fff;
-  padding: 1.5rem 1.7rem;
-  border-radius: 20px;
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.06);
-}
-
-.ingredients-column h3,
-.instructions-column h3 {
-  margin-top: 0;
-}
-
-.ingredients-column ul,
-.instructions-column ol {
-  margin-top: 0.6rem;
-  padding-left: 1.2rem;
-}
-
-.favorite-form,
-.meal-plan {
-  margin-top: 1rem;
-}
-
-.meal-plan select {
-  padding: 0.4rem 0.6rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  margin: 0 0.5rem 0 0.25rem;
-}
-
-@media (max-width: 768px) {
-
-  .recipe-columns {
-    grid-template-columns: 1fr;
-    padding: 1.2rem 1.1rem;
-  }
-}
+/* Recipe Card styles */
 
 .recipe-card {
   background: #fff2e0;
@@ -238,6 +168,124 @@ body {
   flex-wrap: wrap;
   justify-content: center;
 }
+
+/* Recipe Details Page Styles start here */
+
+.recipe-details {
+  margin-top: 1.5rem;
+  background: #fff7ee;
+  padding: 2rem;
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-main {
+  margin-bottom: 2rem;
+  background: transparent;
+  padding: 0;
+  margin-bottom: 2rem;
+  box-shadow: none;
+  text-align: center;
+}
+
+
+#recipe-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #3a1f0f;
+  text-align: center;
+}
+
+.recipe-image {
+  max-height: 420px;
+  border-radius: 28px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+}
+
+.recipe-summary {
+  margin-top: 0.75rem;
+  color: #555;
+}
+
+.recipe-columns {
+  display: grid;
+  grid-template-columns: 1.1fr 1.3fr;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-top: 1.5rem;
+  background: #fff2e0;
+  border: 1px solid #ffb078;
+  padding: 1.5rem 1.7rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.06);
+}
+
+.ingredients-column h3,
+.instructions-column h3 {
+  margin-top: 0;
+}
+
+.ingredients-column ul,
+.instructions-column ol {
+  margin-top: 0.6rem;
+  padding-left: 1.2rem;
+}
+
+.ingredients-column ul li,
+.instructions-column p,
+.instructions-column li{
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.instructions-column ol li{
+  margin-bottom: 0.8rem;
+}
+
+.ingredients-column ul li::marker{
+  color: #ff7e3d;
+}
+
+.ingredients-column li:hover {
+  color: #ff7e3d;
+  cursor: default;
+}
+
+.recipe-actions{
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.recipe-actions .btn{
+  min-width: 180px;
+}
+
+.favorite-form,
+.meal-plan {
+  margin-top: 1rem;
+}
+
+.meal-plan select {
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin: 0 0.5rem 0 0.25rem;
+}
+
+@media (max-width: 768px) {
+
+  .recipe-columns {
+    grid-template-columns: 1fr;
+    padding: 1.2rem 1.1rem;
+  }
+}
+
+
 
 
 

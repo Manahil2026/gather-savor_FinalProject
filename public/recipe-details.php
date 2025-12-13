@@ -52,7 +52,7 @@
 <body>
 
 	<div id="modal" class="modal-hidden">
-		<label> Select a day:</label>
+		<label for="day-selection"> Select a day:</label>
 		<div>
 			<select id="day-selection" required>
 			<option value="" disabled selected>Select day</option>
@@ -64,9 +64,12 @@
 			<option value="saturday">Saturday</option>
 			<option value="sunday">Sunday</option>
 		</select> 
-		<button id="add-mealplan-button" class="btn secondary-btn">Add to Meal Plan</button>
-		<button id="close modal">Close</button>
-		
+
+		<div class = "modal-actions">
+			<button id="add-mealplan-button" class="btn primary-btn">Add to Meal Plan</button>
+			<button id="close-modal" class="modal-close">Cancel</button>
+			
+			</div>
 		</div>
 		
 	</div>
@@ -110,24 +113,23 @@
 			</div>
 
 
+		<div class="recipe-columns">
+
 			<!--Ingredients List-->
-			<div class="ingredients-list">
+			<div class="ingredients-column">
 				<h3>Ingredients:</h3>
-				<ul id="recipe-ingredients">
-				</ul>
+				<ul id="recipe-ingredients"></ul>
 			</div>
 
 			<!--Instructions for the recipe-->
-			<div class="instructions-list">
+			<div class="instructions-column">
 				<h3>Instructions</h3>	
-				<div id="recipe-instructions">
-					
-				</div>
+				<div id="recipe-instructions"></div>
 			</div>
+		</div>
 
 
-			<!--temporary div cause the style is really bugging me-->
-			<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: center">
+			<div class = "recipe-actions">
 
 				<!--Favorites button (change w/ javascript?)-->
 				<button class = "btn primary-btn" id="toggleFavorite">Add Favorite</button>
@@ -139,6 +141,8 @@
 			</div>
 		</section>
 	</main>
+
+	<div id="modal-backdrop" class="modal-backdrop-hidden"></div>
 
 	<script src="assets/js/recipe-details.js"></script>
 </body>

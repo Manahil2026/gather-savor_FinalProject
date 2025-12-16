@@ -46,7 +46,7 @@ function requestRemove(event){
 
 
     const btn = event.target;
-    const recipe_id = btn.parentElement.querySelector(".recipe-item").id
+    const recipe_id = btn.parentElement.querySelector(".recipe-link").id
     const day = btn.closest(".day-column").id
 
     fetch("http://localhost/meal-planner.php",{
@@ -87,16 +87,17 @@ function requestRemove(event){
             const listContent = document.createElement('div');
             const link = document.createElement('a');
             const removeButton = document.createElement('button');
-            removeButton.classList = "btn secondary-btn";
-            removeButton.style = "margin-left: 20px;"
+            removeButton.classList = "remove-btn";
+           
             
 
 
-            link.classList = "recipe-item btn primary-btn";
+            link.classList = "recipe-link";
+            listContent.classList.add('meal-item');
             link.id = recipe_id;
             link.textContent = recipe_title;
-            link.href = `http://final.domain.local/recipe-details.php?recipe_id=${recipe_id}`;
-            removeButton.textContent = "Remove this";
+            link.href = `http://localhost/recipe-details.php?recipe_id=${recipe_id}`;
+            removeButton.textContent = "Remove";
             removeButton.addEventListener('click', requestRemove);
 
             

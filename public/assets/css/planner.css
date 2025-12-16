@@ -6,11 +6,14 @@
 
 .page-header h1 {
   margin: 0 0 0.25rem;
+  text-align: center;
+  color: #2b1b12;
 }
 
 .page-header p {
   margin: 0;
-  color: #555;
+  color: #8a4b17;
+  text-align: center;
 }
 
 .meal-planner-grid {
@@ -21,7 +24,7 @@
 }
 
 .day-column {
-  background: #fff;
+  background: #fff2e0;
   border-radius: 12px;
   padding: 0.9rem 1rem 1.1rem;
   box-shadow: 0 2px 6px rgba(0,0,0,0.06);
@@ -42,7 +45,8 @@
   padding: 0.6rem 0.7rem;
   background: #faf9f7;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  overflow:hidden;
 }
 
 .placeholder-text,
@@ -61,6 +65,63 @@
 .day-slot:hover {
   border-color: #ff7e3d;
   background: #fff8f3;
+}
+
+.plan-list{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width:100%;
+}
+
+.plan-list li{
+  background: #fff;
+  border-radius: 14px;
+  padding: 0.5rem 0.6rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  width: 100%;
+}
+
+.plan-list li:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.recipe-link{
+  flex:1;
+  text-decoration: none;
+  color: #222;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.2;
+  overflow:hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow:hidden;
+}
+
+.recipe-link:hover{
+  color: #ff7e3d;
+}
+
+.remove-btn{
+  background: transparent;
+  border: 1px solid #ff7e3d;
+  color: #ff7e3d;
+  font-size: 0.7rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.remove-btn:hover{
+  background: #ff7e3d;
+  color: white;
 }
 
 @media (max-width: 600px) {

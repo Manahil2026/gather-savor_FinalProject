@@ -1,6 +1,6 @@
 
 //Leaving this api key in the open, for a real web server hide this, or even just keep the logic on the web server not in the client.
-fetch("https://api.spoonacular.com/recipes/complexSearch?apiKey=79f089b8a521468eadcd3dcad358548a&number=20")
+fetch("https://api.spoonacular.com/recipes/complexSearch?apiKey=79f089b8a521468eadcd3dcad358548a&number=100")
     .then(res => res.json())
     .then(res => populateRecipes(res))
 

@@ -66,7 +66,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     </nav>
   </header>
 
-  <main class="page-container">
+  <main class="page-container favorites-page">
     <section class="page-header">
       <h1>Favorite Recipes</h1>
       <p>Your saved recipes will be listed here.</p>

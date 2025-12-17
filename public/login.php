@@ -1,7 +1,4 @@
 <?php
-  session_start(); // Start a new session or resume existing one
-  //if the person is already authenticated redirect.
-  require_once __DIR__ . "/../src/auth/handleLogin.php";
 ?>
 
 <!DOCTYPE html>
@@ -17,26 +14,15 @@
     <section class="auth-card">
       <h1>Login</h1>
 
-      <?php if (isset($_SESSION['error'])): ?> <!-- If there is an error message in the session, display it -->
-        <div class="alert error">
-          <?= $_SESSION['error']; unset($_SESSION['error']); ?> <!-- Display and then clear the error message -->
-        </div>
-      <?php endif; ?>
-
-      <?php if (isset($_SESSION['success'])): ?> <!-- If there is a success message in the session, display it -->
-        <div class="alert success">
-          <?= $_SESSION['success']; unset($_SESSION['success']); ?> <!-- Display and then clear the success message -->
-        </div>
-      <?php endif; ?>
+   
+      <div class="alert error hidden"></div>
 
 
-      <form class="auth-form" method="post" action="login.php">
+      <form class="auth-form" method="post">
        
           <label>Email</label>
           <input type="email" name="email" required>
-        
-
-      
+    
           <label>Password</label>
           <input type="password" name="password" required>
         
@@ -50,5 +36,6 @@
       
     </section>
  
+  <script src="assets/js/login.js"></script>
 </body>
 </html>

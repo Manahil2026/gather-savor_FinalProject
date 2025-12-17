@@ -1,13 +1,7 @@
+-- Replaced my(Manahil) db code with the edits that Anthony made to match his naming conventions and added fields
+
 CREATE DATABASE IF NOT EXISTS gather_savor;
 USE gather_savor;
-
-CREATE USER IF NOT EXISTS 'gather_user'@'localhost' IDENTIFIED BY 'gather123';
-
-GRANT SELECT, INSERT, UPDATE, DELETE
-ON gather_savor.*
-TO 'gather_user'@'localhost';
-
-FLUSH PRIVILEGES;
 
 -- Users table
 CREATE TABLE IF NOT EXISTS users (
@@ -37,11 +31,14 @@ CREATE TABLE IF NOT EXISTS meal_plans (
 );
 
 -- Shopping lists table
-CREATE TABLE IF NOT EXISTS shopping_lists (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
-    recipe_id INT,
-    ingredient VARCHAR(255),
-    quantity INT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+create table if not existsshopping_lists( id int primary key auto_increment, 
+    user_id int, 
+    recipe_id int, 
+    created_at timestamp default current_timestamp);
+
+-- Ingredients table
+create table if not exists ingredients( id int primary key auto_increment, 
+    user_id int, 
+    recipe_id int, 
+    ingredient varchar(255), 
+    created_at timestamp default current_timestamp);

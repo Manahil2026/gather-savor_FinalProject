@@ -9,7 +9,7 @@ require_once __DIR__ . '/../messages.php';
 try{
     $user_id = $_SESSION['user_id'];
     //Need to give the ids so they're easy to remove/toggle.
-    $stmt = $conn->prepare("SELECT ingredient, recipe_id FROM shopping_list_ingredients WHERE user_id = ? ORDER BY recipe_id, ingredient");
+    $stmt = $conn->prepare("SELECT ingredient, recipe_id FROM ingredients WHERE user_id = ? ORDER BY recipe_id, ingredient");
     $stmt->execute([$user_id]);
     $result = $stmt->fetchAll();
 

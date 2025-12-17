@@ -1,12 +1,13 @@
 
 //Load the page
 document.addEventListener('DOMContentLoaded', event => {
-    fetch("http://localhost/meal-planner.php", {
+    fetch("http://localhost/api/v1/api.php", {
+        credentials: "include",
         method: "POST",
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/json"
         },
-        body: new URLSearchParams({
+        body: JSON.stringify({
             action: "get-mealplan"
         })
     })
@@ -49,12 +50,13 @@ function requestRemove(event){
     const recipe_id = btn.parentElement.querySelector(".recipe-link").id
     const day = btn.closest(".day-column").id
 
-    fetch("http://localhost/meal-planner.php",{
+    fetch("http://localhost/api/v1/api.php",{
+        credentials: "include",
         method: "POST",
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/json"
         },
-        body: new URLSearchParams({
+        body: JSON.stringify({
             action: "delete-recipe",
             recipe_id: recipe_id,
             day: day

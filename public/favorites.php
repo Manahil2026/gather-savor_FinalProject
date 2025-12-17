@@ -1,36 +1,5 @@
 <?php
-require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session check to make sure user is logged in.
-
-require_once __DIR__ . "/../src/messages.php"; //json messages
-
-
-if($_SERVER["REQUEST_METHOD"] === "POST"){
-  
-  if(!isset($_POST['action'])){
-    error_message("action not set");
-    var_dump($_POST);
-    exit;
-  }
-
-  $action = $_POST['action'];
-  switch($action){
-
-    case "load-favorites":
-      require_once __DIR__ . '/../src/recipes/loadFavorites.php'; //Load favorite recipes
-      break;
-
-    case "delete-favorite": 
-      require_once __DIR__ . '/../src/recipes/removeFavorite.php';
-      break;
-
-
-    default:
-      error_message("Action is not valid");
-      break;
-  }
-
-  exit;
-} 
+  require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session check to make sure user is logged in.
 ?>
 
 <!DOCTYPE html>

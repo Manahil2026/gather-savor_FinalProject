@@ -99,6 +99,14 @@
   text-decoration: underline;
 }
 
+.hidden{
+  display: none;
+}
+
+.visible{
+  display: block
+}
+
 @media (max-width: 480px) {
   .auth-card {
     margin: 1rem;

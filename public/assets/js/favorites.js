@@ -1,23 +1,4 @@
-//Tell the page to load the favorites
-
-//Take the response, use the api to get the details for the id
-
-//fill in the cards
-
-
-/*
-    <div>
-        <h3>recipe title</h3>
-        <img src=image link>
-        <button>Remove Favorite</button> 
-    </div>
-*/
-
-
 const favoritesContainer = document.getElementById('favorites-container');
-
-
-
 function showToast(success, text){
 
         const toast = document.querySelector(".toast");    
@@ -44,12 +25,13 @@ function sendRemoveRequest(event){
     const id = recipeCard.id;
 
 
-    fetch("http://localhost/favorites.php", {
+    fetch("http://localhost/api/v1/api.php", {
+        credentials: "include",
         method: "POST",
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/json"
         },
-        body: new URLSearchParams({
+        body: JSON.stringify({
             action: "delete-favorite",
             recipe_id: id
         })
@@ -77,37 +59,55 @@ function populateRecipes(recipes){
         fetch(`https://api.spoonacular.com/recipes/${recipe['recipe_id']}/information?apiKey=79f089b8a521468eadcd3dcad358548a`)
             .then(res => res.json())
             .then(details => {
-                const card = document.createElement('div');
-                card.className = 'favorite-card';
-                card.id = details.id;
 
-                card.innerHTML = `
-                    <img src="${details.image}" alt="${details.title}">
-                    <div class="card-content">
-                        <h3>${details.title}</h3>
+                const id = details.id
+                const image = details.image
+                const title = details.title
 
-                        <div class ='card-actions'>
-                            <a href='recipe-details.php?recipe_id=${details.id}'
-                                class='btn secondary-btn'>View Recipe</a>
+                const outerDiv = document.createElement('div');
+                const imageElement = document.createElement('img');
+                const cardContentDiv = document.createElement('div');
+                const cardActionsDiv = document.createElement('div');
+                const titleH = document.createElement('h3');
+                const detailsA = document.createElement('a');
+                const removeBtn = document.createElement('button');
+                
+            
+                outerDiv.classList = "favorite-card";
+                imageElement.src = image;
+                imageElement.alt = title;
+                cardContentDiv.classList = "card-content";
+                titleH.textContent = title;
+                cardActionsDiv.classList = "card-actions";
+                detailsA.classList = "btn secondary-btn";
+                detailsA.href = `recipe-details.php?recipe_id=${id}`
+                detailsA.textContent = "View Recipe";
+                removeBtn.classList = "btn secondary-btn";
+                removeBtn.textContent = "Remove";
+                removeBtn.addEventListener("click", sendRemoveRequest);
 
-                            <button class = 'remove-btn'>Remove</button>
-                        </div>
-                    </div>
-                `;
-                card.querySelector(".remove-btn").addEventListener("click", sendRemoveRequest);
+                
+                cardActionsDiv.appendChild(detailsA);
+                cardActionsDiv.appendChild(removeBtn);
+                cardContentDiv.appendChild(titleH)
+                cardContentDiv.appendChild(cardActionsDiv)
 
-                favoritesContainer.appendChild(card);
+                outerDiv.appendChild(imageElement)
+                outerDiv.appendChild(cardContentDiv);
+            
+                favoritesContainer.appendChild(outerDiv);
             }) 
     })
 }
 
 function loadRecipes(){
-    fetch("http://localhost/favorites.php",{
+    fetch("http://localhost/api/v1/api.php",{
+        credentials: "include",
         method: "POST",
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/json"
         },
-        body: new URLSearchParams({
+        body: JSON.stringify({
             action: "load-favorites"
         })
     })

@@ -62,12 +62,13 @@ function showToast(success, text){
 
 //more dynamic page content, need to know if the recipe is CURRENTLY a favorite or in the shopping list
 function setFavoriteStatus(btn){
-    fetch("http://localhost/recipe-details.php",{
+    fetch("http://localhost/api/v1/api.php",{
+        credentials: "include",
         method: "POST",
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/json"
         },
-        body: new URLSearchParams({
+        body: JSON.stringify({
             action: "checkfavorite",
             recipe_id: recipe_id.value
         })
@@ -80,12 +81,13 @@ function setFavoriteStatus(btn){
 }
 
 function setShoppingListStatus(btn){
-    fetch("http://localhost/recipe-details.php",{
+    fetch("http://localhost/api/v1/api.php",{
+        credentials: "include",
         method: "POST",
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/json"
         },
-        body: new URLSearchParams({
+        body: JSON.stringify({
             action: "check-shoppingList",
             recipe_id: recipe_id.value
         })
@@ -112,12 +114,13 @@ function toggleFavoriteRequest(event){
     event.preventDefault();
     //fetch to recipe-details.php as POST
     //there should be a success or error message as a response, trigger modal
-    fetch("http://localhost/recipe-details.php", {
+    fetch("http://localhost/api/v1/api.php", {
+        credentials: "include",
         method: "POST",
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/json"
         },
-        body: new URLSearchParams({
+        body: JSON.stringify({
             action: "toggle-favorite",
             recipe_id: recipe_id.value
         })
@@ -140,12 +143,13 @@ function toggleShoppingListRequest(event){
     event.preventDefault();
     //fetch to recipe-details.php as POST
     //there should be a success or error message as a response, trigger modal
-    fetch("http://localhost/recipe-details.php", {
+    fetch("http://localhost/api/v1/api.php", {
+        credentials: "include",
         method: "POST",
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/json"
         },
-        body: new URLSearchParams({
+        body: JSON.stringify({
             action: "toggle-shoppingList",
             recipe_id: recipe_id.value
         })
@@ -183,12 +187,13 @@ function addMealPlanRequest(event){
     //Yes, you could change it with inspect, no I don't care because all of this is client side anyways.
     const recipeTitle = recipeTitleElement.textContent;
 
-    fetch("http://localhost/recipe-details.php", {
+    fetch("http://localhost/api/v1/api.php", {
+        credentials: "include",
         method: "POST",
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/json"
         },
-        body: new URLSearchParams({
+        body: JSON.stringify({
             action: "add-mealPlan",
             recipe_id: recipe_id.value,
             day: day,

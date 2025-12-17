@@ -6,7 +6,7 @@ fetch("https://api.spoonacular.com/recipes/complexSearch?apiKey=79f089b8a521468e
 
 
 const recipeResultsSection = document.querySelector("#recipe-results");
-const searchButton = document.getElementById('search-button');
+const searchBox = document.getElementById('search-box');
 
 function getRecipeDetails(event){
     const id = event.target.closest("div").id;
@@ -30,7 +30,9 @@ function populateRecipes(recipes){
             const newA = document.createElement('a');
             const newBtn = document.createElement('button');
 
-
+            newArticle.addEventListener('click', event => {
+                window.location.href = `http://localhost/recipe-details.php?recipe_id=${recipe_id}`
+            })
 
             newArticle.classList = "recipe-card"
             newArticle.id = recipe_id;
@@ -79,7 +81,7 @@ function search(clickEvent){
 }
 
 function testFoodName(card){
-    const searchBox = document.getElementById('search-box');
+    
     //Filter for the search box
     const foodName = card.querySelector('.recipe-card-title').textContent
     const searchExpression = new RegExp(".*" + searchBox.value + ".*", "i")
@@ -93,4 +95,5 @@ function testFoodName(card){
 }
 
 
-searchButton.addEventListener("click", search)
+
+searchBox.addEventListener("input", search)

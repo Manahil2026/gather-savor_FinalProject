@@ -1,34 +1,5 @@
 <?php
 require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session check to make sure user is logged in.
-require_once __DIR__ . '/../src/messages.php';
-
-
-if($_SERVER['REQUEST_METHOD'] === "POST"){
-	if(!isset($_POST['action'])){
-		error_message("Action not set");
-		exit;
-	}
-
-
-	$action = $_POST['action'];
-	switch($action){
-		
-		case "get-mealplan":
-			require_once __DIR__ . "/../src/recipes/loadMealPlan.php";
-			break;
-		
-		case "delete-recipe":
-			require_once __DIR__ . "/../src/recipes/removeMealPlan.php";
-			break;
-		default: 
-		
-		
-		error_message("Action not valid");
-		exit;
-	}
-}
-
-$meal_plan;
 ?>
 
 <!DOCTYPE html>

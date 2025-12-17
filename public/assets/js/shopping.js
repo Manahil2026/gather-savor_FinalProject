@@ -1,36 +1,8 @@
-//Get everything on the person's shopping list
-
-//A card with an image, title, ul of the ingredietns
-
-//buttons next to ingredietns (or the ingredients themselves are the buttons) which: strike thru the text
-//and they also make a request to add them to the database under ingredients
-
-//and when clicked again remove them.
 
 
-//Just need need add and delete
-//If ingredient x is requried by recipe+id id, and ingredient x by recipe_id id does not exist, it's not checked off, vice versa
-//handling multiple quantities:
-//The server must tell us the quantity
-//ingredient (1st) check off if(quantity > 1)
-//ingredient (2nd) check off if(quantity > 2)
-//ingredient (3rd) check off if (quantity > 3)
-//?
-
-//remove ingredient: just remove one of them, alter table set column quantity = quantity -1 where id = "12345"??
-//or just have quantity field in the database, or just count the amount of entries in the sql db. like 3 duplicates, and just remove one.
-
-//Copied some stuff from my comments in here so that full css works
+const shoppingListArea = document.getElementById('shopping-list-groups');
 
 
-const shoppingListArea = document.getElementById('shopping-list');
-
-
-function toggleStrikeThrough(item, checked){
-   item.classList.toggle("checked", checked);
-   const checkbox = item.querySelector(".ingredient-checkbox");
-   if (checkbox) checkbox.checked = checked;
-}
 
 function showToast(success, text){
 
@@ -41,7 +13,6 @@ function showToast(success, text){
         const toastText = toast.querySelector('p');
         toastText.textContent = text;
         toast.classList = "toast toast-show";
-
 
         const timeout = 2000;
         setTimeout(() => {
@@ -55,32 +26,34 @@ function toggleIngredient(event){
 
     // Use event.currentTarget to reliably reference the <li> even when the
     // user clicks the checkbox or the span inside the li.
-    const item = event.currentTarget || event.target.closest('li');
-    const recipe_id = item.closest('div').id;
-    const ingredientNameEl = item.querySelector('.ingredient-name');
-    const ingredient_name = ingredientNameEl ? ingredientNameEl.textContent.trim() : item.textContent.trim();
+    const checkbox = event.target
+    const recipe_id = checkbox.closest('.shopping-group').id;
+    const ingredientNameElement = checkbox.parentElement.querySelector('.ingredient-details').querySelector('.ingredient-name');
+    const ingredientName = ingredientNameElement.textContent;
 
-    fetch("http://localhost/shopping-list.php", {
+    fetch("http://localhost/api/v1/api.php", {
+        credentials: "include",
         method: "POST",
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/json"
         },
-        body: new URLSearchParams({
+        body: JSON.stringify({
             action: "toggle-ingredient",
             recipe_id: recipe_id,
-            ingredient_name: ingredient_name
+            ingredient_name: ingredientName
         })
         
         })
         .then(res => res.json())
         .then(res => {
+            console.log(res);
             if(res.status == "success"){
-                if(res.message == "added"){
-                    //add strikethrough on the list item
-                    toggleStrikeThrough(item, true);
+                if(res.message.added == true){
+                    console.log('added');
+                    
                 }
                 else{
-                    toggleStrikeThrough(item, false);
+                    console.log("removed");
                 }
             }
             else{
@@ -90,139 +63,161 @@ function toggleIngredient(event){
     })
 }
 
-function populateRecipeDetails(recipes){
 
-    recipes.forEach(recipe => {
-        const recipe_id = recipe.recipe_id;
-        fetch(`https://api.spoonacular.com/recipes/${recipe_id}/information?apiKey=79f089b8a521468eadcd3dcad358548a`)
-            .then(res => res.json())
-            .then(recipe => {    
-
-                const id = recipe['id'];
-                const title = recipe['title']
-                const image = recipe['image']
-                const ingredients = recipe['extendedIngredients'];
-
-
-                /*
-                <div>
-                    <h3>title</h3>
-                    <img> 
-                    <ul>
-                        <li>ingredient</li>
-                    </ul>
-
-                </div>
-                */
-                       
-                // Build DOM that matches shopping-list.css expectations
-                const recipeDiv = document.createElement('div');
-                const header = document.createElement('div');
-                const nameWrap = document.createElement('div');
-                const titleDiv = document.createElement('div');
-                const imageElement = document.createElement('img');
-                const ingredientsUl = document.createElement('ul');
-
-                header.className = 'group-header';
-                nameWrap.className = 'group-name';
-                titleDiv.className = 'group-title';
-
-                // set ids/classes and content
-                recipeDiv.id = recipe_id;
-                recipeDiv.className = 'shopping-group';
-                titleDiv.textContent = title;
-                imageElement.src = image;
-
-                // assemble header
-                nameWrap.appendChild(titleDiv);
-                header.appendChild(nameWrap);
-
-                // add the ingredients list
-                ingredients.forEach(ingredient => {
-                    const ingredientLi = document.createElement('li');
-                    ingredientLi.className = 'ingredient-item';
-                    // Use original text when available to show amount/unit, fall back to name
-                    const quantityText = ingredient.original ? ingredient.original : '';
-                    ingredientLi.innerHTML = `
-                        <input type='checkbox' class='ingredient-checkbox'>
-                        <div class='ingredient-details'>
-                            <span class='ingredient-name'>${ingredient.name}</span>
-                            <span class='ingredient-quantity'>${quantityText}</span>
-                        </div>
-                    `;
-                    ingredientLi.addEventListener('click', toggleIngredient);
-                    ingredientsUl.appendChild(ingredientLi);
-                });
-
-                // append to recipe container in order expected by css
-                recipeDiv.appendChild(header);
-                recipeDiv.appendChild(imageElement);
-                recipeDiv.appendChild(ingredientsUl);
-                shoppingListArea.appendChild(recipeDiv);
-                //The main logic for this app is that the ingredients list will have buttons that interact with the db (e.g. add ingredient)
+async function populateRecipeDetails(recipes){
+    return Promise.all(
+        recipes.map(recipe => {
+            const recipe_id = recipe.recipe_id;
             
-        })  
-    })
+            return fetch(`https://api.spoonacular.com/recipes/${recipe_id}/information?apiKey=79f089b8a521468eadcd3dcad358548a`)
+                .then(res => res.json())
+                .then(recipe => {    
+
+                    //Get all variables from the api
+                    const id = recipe['id'];
+                    const title = recipe['title']
+                    const image = recipe['image']
+                    const ingredients = recipe['extendedIngredients'];
+
+
+                    //construct the dom for the page    
+                    const outerDiv = document.createElement('div');
+                    const groupHeaderDiv = document.createElement('div');
+                    const groupHeaderNameDiv = document.createElement('div');
+                    const groupTitleDiv = document.createElement('div');
+                    const imageElement = document.createElement('img');
+                    const ingredientsUL = document.createElement('ul');
+
+
+                    //set the properties for the dom
+                    outerDiv.id = id;
+                    outerDiv.classList = "shopping-group";
+                    groupHeaderDiv.classList = "group-header";
+                    groupHeaderNameDiv.classList = "group-name";
+                    groupTitleDiv.classList = "group-title";
+                    groupTitleDiv.textContent = title;
+                    imageElement.src = image;
+
+                    //construct and set properties for the ingredients
+                    ingredients.forEach(ingredient => {
+
+                        //Set the variables needed for the dom
+                        const ingredientName = ingredient['name'];
+                        const ingredientOriginal = ingredient['original'];
+
+                        //build the dom
+                        const ingredientLI = document.createElement('li');
+                        const checkBoxInput = document.createElement('input');
+                        const ingredientDetailsDiv = document.createElement('div');
+                        const ingredientNameSpan = document.createElement('span');
+                        const exactIngredientNameSpan = document.createElement('span');
+
+                        //set the properties for the dom
+                        ingredientLI.classList = "ingredient-item";
+                        checkBoxInput.type = "checkbox";
+                        checkBoxInput.classList = "ingredient-checkbox";
+                        checkBoxInput.addEventListener('change', toggleIngredient);
+                        ingredientDetailsDiv.classList = "ingredient-details"
+                        ingredientNameSpan.classList = "ingredient-name";
+                        ingredientNameSpan.textContent = ingredientName;
+                        exactIngredientNameSpan.classList = "ingredient-quantity";
+                        exactIngredientNameSpan.textContent = ingredientOriginal;
+
+                        //append each element
+                        ingredientDetailsDiv.appendChild(ingredientNameSpan);
+                        ingredientDetailsDiv.appendChild(exactIngredientNameSpan);
+                        ingredientLI.appendChild(checkBoxInput);
+                        ingredientLI.appendChild(ingredientDetailsDiv);
+
+                        ingredientsUL.appendChild(ingredientLI);
+                    })
+
+                    //append each element
+                    groupHeaderNameDiv.appendChild(groupTitleDiv);
+                    groupHeaderDiv.appendChild(groupHeaderNameDiv);
+                    outerDiv.appendChild(groupHeaderDiv);
+                    outerDiv.appendChild(imageElement);
+                    outerDiv.appendChild(ingredientsUL);
+                    shoppingListArea.appendChild(outerDiv);
+            })  
+        })
+    )
 }
 
-document.addEventListener('DOMContentLoaded', event => {
-
-
-    //First get everything that should be in the shopping list and their required ingredients (api)
-    fetch("http://localhost/shopping-list.php", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: new URLSearchParams({
-            action: "get-shoppingList"
-        })
-    })
-    .then(res => res.json())
-    .then(res => {
-            populateRecipeDetails(res.message);
-        })
-    });
-
+function processCurrentList(){
     //Get the current ingredients that the user has and mark them checked in the UI
-    fetch("http://localhost/shopping-list.php", {
+    return fetch("http://localhost/api/v1/api.php", {
+        credentials: "include",
         method: "POST",
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/json"
         },
-        body: new URLSearchParams({
+        body: JSON.stringify({
             action: "get-shoppingIngredients"
         })
     })
     .then(res => res.json())
     .then(res => {
         // For each returned ingredient, find the corresponding recipe block and
-        // list item and mark it as checked.
         res.message.forEach(recipe => {
-            const ingredient_name = recipe.ingredient_name;
+            const ingredientName = recipe.ingredient
             const recipe_id = recipe.recipe_id;
 
             const recipeContainer = document.getElementById(recipe_id);
             if(!recipeContainer) {
-                // The recipe DOM may not yet be loaded; skip if not found.
-                console.log(`no possible target for recipe id ${recipe_id}`);
+                //skip if not found.
+                console.log(`warning: no possible target for recipe id ${recipe_id}`);
                 return;
             }
+            
+            
+            const ingredients = recipeContainer.querySelector('ul').querySelectorAll('.ingredient-item');
+            ingredients.forEach(ingredient => {
+                const checkBox = ingredient.querySelector('.ingredient-checkbox');
+                const ingredientDetails = ingredient.querySelector('.ingredient-details');
+                const ingredientNameElement = ingredientDetails.querySelector('.ingredient-name');
+                
+                //for now just matching by the name, not great, but...
+                if(ingredientNameElement.textContent == ingredientName){
+                    checkBox.checked = true;
+                }
+            })
+        })
+    })
+}
 
-            const possibleLis = recipeContainer.querySelectorAll('li.ingredient-item');
-            if(possibleLis && possibleLis.length){
-                possibleLis.forEach(li => {
-                    const nameEl = li.querySelector('.ingredient-name');
-                    const text = nameEl ? nameEl.textContent.trim() : li.textContent.trim();
-                    if(text === ingredient_name){
-                        toggleStrikeThrough(li, true);
-                    }
-                })
-            }
-            else{
-                console.log(`no target li for recipe id ${recipe_id}`);
-            }
+
+async function loadPage(){ 
+
+
+
+    //Do the fetch
+    const response = await fetch("http://localhost/api/v1/api.php", {
+        credentials: "include",
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            action: "get-shoppingList"
         })
     })
 
-    //Find them in the buttons and toggle them as checked off
+    //convert to json
+    const res = await response.json();
+
+    //Build the dom
+    await populateRecipeDetails(res.message);
+    
+    //Process the shopping list
+    processCurrentList();
+
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    loadPage();
+});
+
+    
+
+    

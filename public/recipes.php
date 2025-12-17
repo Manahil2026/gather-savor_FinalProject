@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session check to make sure user is logged in.
+	require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session check to make sure user is logged in.
 ?>
 
 
@@ -39,7 +39,6 @@ require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session c
 		<section class="search-section">
 			<form id="recipe-search-form">
 				<input type="text" id="search-box" placeholder="Search recipes..." required>
-				<button id="search-button" type="submit" class="btn secondary-btn">Search</button>
 			</form>
 		</section>
 

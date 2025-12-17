@@ -1,39 +1,5 @@
 <?php
-require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session check to make sure user is logged in.
-require_once __DIR__ . '/../src/messages.php'; 
-
-
-  if($_SERVER['REQUEST_METHOD'] == "POST"){
-    if(!isset($_POST['action'])){
-      error_message("Action not set");
-      exit;
-    }
-    $action = $_POST['action'];
-
-    switch($action){
-      case "get-shoppingList":
-        include __DIR__ . '/../src/shopping-list/getShoppingList.php';
-        break;
-
-        case "get-shoppingIngredients":
-          include __DIR__ . '/../src/shopping-list/getIngredientsList.php';
-          break;
-
-      case "toggle-ingredient":
-        include __DIR__ . '/../src/shopping-list/toggleIngredient.php';
-        break;
-
-      case "checkIngredient.php": //In the future, I don't want a whole separate request to handle whether or not a strikethrough or a star should be lit up
-        include __DIR__ . '/../src/shopping-list/checkIngredient.php';
-        break;
-
-      default: 
-        error_message("Invalid request");
-        break;
-    }
-    exit;
-  }
-
+  require_once __DIR__ . '/../src/auth/checkSession.php'; // Include the session check to make sure user is logged in.
 ?>
 
 <!DOCTYPE html>

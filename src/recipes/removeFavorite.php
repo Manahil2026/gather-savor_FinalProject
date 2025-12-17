@@ -8,13 +8,15 @@ try{
 
     $user_id = $_SESSION['user_id']; // Get user id from session
 
+    $raw = file_get_contents("php://input");
+    $data = json_decode($raw, true);
 
-    if(!isset($_POST['recipe_id'])){
+    if(!isset($data['recipe_id'])){
         error_message("missing recipe id");
         exit;
     }
 
-    $recipe_id = $_POST['recipe_id'];
+    $recipe_id = $data['recipe_id'];
     $stmt = $conn->prepare("DELETE FROM favorites WHERE user_id = :user AND recipe_id = :rid LIMIT 1");
     $stmt->execute([':user' => $user_id, ':rid' => $recipe_id]);
 

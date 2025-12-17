@@ -1,40 +1,5 @@
 <?php
-	//This php was written by ant, it's a routing mechanism to facilitate the Javascript
-
-	//protected route
 	require_once __DIR__ . '/../src/auth/checkSession.php'; 
-	require_once __DIR__ . '/../src/messages.php'; 
-
-	if($_SERVER['REQUEST_METHOD'] == 'POST'){
-		
-		$action = $_POST['action'];
-		if($action){
-			switch($action){
-
-				case "toggle-favorite":
-					require_once __DIR__ . "/../src/recipes/toggleFavorite.php";
-					break;
-
-				case "add-mealPlan":
-					require_once __DIR__ . "/../src/recipes/addToMealPlan.php";
-					break;
-
-				case "checkfavorite":
-					require_once __DIR__ . "/../src/recipes/checkfavorite.php";
-					break;
-				case "toggle-shoppingList":
-					require_once __DIR__ . "/../src/shopping-list/toggleShoppingList.php";
-					break;
-				case "check-shoppingList":
-					require_once __DIR__ . "/../src/shopping-list/checkShoppingList.php";
-				default:
-					error_message("invalid request");
-					break;
-			}
-		}
-		exit;
-	}
-
 ?>
 
 <!DOCTYPE html>

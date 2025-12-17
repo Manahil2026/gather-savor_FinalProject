@@ -6,8 +6,12 @@
 require_once __DIR__ . '/../db.php'; // Include db connection file
 require_once __DIR__ . '/../messages.php'; //error and success messages to the client
 
+
+$raw = file_get_contents("php://input");
+$data = json_decode($raw, true);
+
 $user_id = $_SESSION['user_id']; // Get user id from session
-$recipe_id = $_POST['recipe_id'] ?? '';
+$recipe_id = $data['recipe_id'] ?? '';
 
 try{
     // Check if it is already a favorite

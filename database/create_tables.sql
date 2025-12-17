@@ -1,7 +1,13 @@
--- Replaced my(Manahil) db code with the edits that Anthony made to match his naming conventions and added fields
-
 CREATE DATABASE IF NOT EXISTS gather_savor;
 USE gather_savor;
+
+CREATE USER IF NOT EXISTS 'gather_user'@'localhost' IDENTIFIED BY 'gather123';
+
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON gather_savor.*
+TO 'gather_user'@'localhost';
+
+FLUSH PRIVILEGES;
 
 -- Users table
 CREATE TABLE IF NOT EXISTS users (

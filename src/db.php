@@ -3,8 +3,8 @@
 // This will be included via require function in other PHP files that meed database access
 
 $dbname = 'gather_savor';
-$username = 'root'; // root is the dafault username for XAMPP
-$password = ''; // I will leave this empty because XAMPP's default psswrd is empty
+$username = 'gather_user'; // Created a new user for the db with limited privileges
+$password = 'gather123'; // password for the new user
 $dsn = "mysql:host=localhost;dbname=$dbname";
 
 

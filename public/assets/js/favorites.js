@@ -40,7 +40,7 @@ function sendRemoveRequest(event){
     //don't refresh
     event.preventDefault();
     const btn = event.target;
-    const recipeCard = btn.closest(".recipe-card")
+    const recipeCard = btn.closest(".favorite-card")
     const id = recipeCard.id;
 
 
@@ -77,33 +77,26 @@ function populateRecipes(recipes){
         fetch(`https://api.spoonacular.com/recipes/${recipe['recipe_id']}/information?apiKey=79f089b8a521468eadcd3dcad358548a`)
             .then(res => res.json())
             .then(details => {
-                const title = details['title'];
-                const image = details['image'];
-                const id = details['id'];
-                
-                const recipeCard = document.createElement('div');
-                const titleElement = document.createElement('h3');
-                const imageElement = document.createElement('img');
-                const removeBtn = document.createElement('button');
+                const card = document.createElement('div');
+                card.className = 'favorite-card';
+                card.id = details.id;
 
+                card.innerHTML = `
+                    <img src="${details.image}" alt="${details.title}">
+                    <div class="card-content">
+                        <h3>${details.title}</h3>
 
-                recipeCard.id = id;
-                recipeCard.classList = "recipe-card";
-                titleElement.textContent = title;
-                imageElement.src =  image;
-                imageElement.style="max-width: 500px; max-height: 500px"
-                removeBtn.textContent = "Remove this Recipe";
-                removeBtn.classList = "btn primary-btn";
-                removeBtn.style="max-width: 200px"
-                removeBtn.addEventListener('click', sendRemoveRequest);
+                        <div class ='card-actions'>
+                            <a href='recipe-details.php?recipe_id=${details.id}'
+                                class='btn secondary-btn'>View Recipe</a>
 
-                recipeCard.style="display:flex; flex-direction: column; gap: 20px"
+                            <button class = 'remove-btn'>Remove</button>
+                        </div>
+                    </div>
+                `;
+                card.querySelector(".remove-btn").addEventListener("click", sendRemoveRequest);
 
-                recipeCard.appendChild(titleElement);
-                recipeCard.appendChild(imageElement);
-                recipeCard.appendChild(removeBtn);
-
-                favoritesContainer.appendChild(recipeCard);
+                favoritesContainer.appendChild(card);
             }) 
     })
 }

@@ -79,10 +79,6 @@ require_once __DIR__ . '/../src/messages.php';
 
     <section id="shopping-list" class="shopping-list-container">
     
-      <!-- JS will replace this placeholder depending on DB results -->
-       <p class="placeholder-text" id = "empty-list-message">
-          Loading your Shopping List...
-       </p>
 
       <!-- JS will insert recipe groups here -->
        <div id = "shopping-list-groups"></div>

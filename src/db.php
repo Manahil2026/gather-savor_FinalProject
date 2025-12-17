@@ -2,6 +2,7 @@
 // This file establishes a connection to the database
 // This will be included via require function in other PHP files that meed database access
 
+require_once "../messages.php";
 $dbname = 'gather_savor';
 $username = 'root'; // root is the dafault username for XAMPP
 $password = ''; // I will leave this empty because XAMPP's default psswrd is empty
@@ -16,8 +17,8 @@ try {
     // ATTR_ERRMODE is a constant that represents the error reporting attribute
     // ERRMODE_EXCEPTION is a constant that represents the exception error mode
 }catch (PDOException $e){
-    die("Database connection failed: " . $e->getMessage()); // getMessage() is a method of the PDOException class that returns the error message
-    //die is used to terminate the script execution, it prints the message and exits
+    error_message($e->getMessage());
+    exit;
 }
 
 

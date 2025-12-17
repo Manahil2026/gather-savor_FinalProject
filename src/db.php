@@ -4,8 +4,8 @@
 
 require_once "messages.php";
 $dbname = 'gather_savor';
-$username = 'fruity'; // root is the dafault username for XAMPP
-$password = ''; // I will leave this empty because XAMPP's default psswrd is empty
+$username = 'gather_user';
+$password = 'gather123';
 $dsn = "mysql:host=localhost;dbname=$dbname";
 
 

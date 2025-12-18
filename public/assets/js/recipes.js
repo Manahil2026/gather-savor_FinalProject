@@ -31,31 +31,18 @@ function getRecipeDetails(event){
 }
 
 
-function populateRecipes(recipes){ 
-    recipes['results'].forEach(recipe => {
-        /*  Filters from api available
-                "cheap": false
-                "dairyFree": false,
-                "dairyFree": false,
-                "diets": [],
-                "gaps": "no",
-                "glutenFree": false,
-                "instructions": "",
-                "ketogenic": false,
-                "lowFodmap": false,
-                "occasions": [],
-                "sustainable": false,
-                "vegan": false,
-                "vegetarian": false,
-                "veryHealthy": false,
-                "veryPopular": false,
-        */
 
-        //newArticle needs data tags for each of the above.
-        //for every recipe id do another api request using https://api.spoonacular.com/recipes/{id}/information
-        //the response will contain the above and then need to get the values of those above
-        //For every true (yes) add it to data tag
-        //then the search button needs to filter it.
+function sleep(ms){
+    return new Promise(r => setTimeout(r, ms));
+}
+
+
+async function populateRecipes(recipes){ 
+
+
+    for(recipe of recipes['results']){
+        await sleep(300)
+
         fetch(`https://api.spoonacular.com/recipes/${recipe['id']}/information?apiKey=79f089b8a521468eadcd3dcad358548a`)
             .then(res => res.json())
             .then(res => {
@@ -124,7 +111,10 @@ function populateRecipes(recipes){
 
                 recipeResultsSection.appendChild(newArticle);
             })
-    })
+            //I'm rate limited
+            
+    }
+    
 }
 
 

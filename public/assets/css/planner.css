@@ -109,20 +109,33 @@
   color: #ff7e3d;
 }
 
-.remove-btn{
+.meal-item{
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.icon-btn{
   background: transparent;
-  border: 1px solid #ff7e3d;
-  color: #ff7e3d;
-  font-size: 0.7rem;
-  padding: 0.25rem 0.55rem;
-  border-radius: 999px;
+  border: none;
+  padding: 0.25rem;
   cursor: pointer;
+  border-radius: 6px;
+  color: #c47a2c;
+  opacity: 0.65;
   transition: all 0.2s ease;
 }
 
-.remove-btn:hover{
-  background: #ff7e3d;
-  color: white;
+.icon-btn svg{
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.icon-btn:hover{
+  background: #ffe3cd;
+  color: #b45309;
+  opacity: 1;
 }
 
 @media (max-width: 600px) {

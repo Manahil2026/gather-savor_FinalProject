@@ -47,8 +47,9 @@ function requestRemove(event){
 
 
     const btn = event.target;
-    const recipe_id = btn.parentElement.querySelector(".recipe-link").id
-    const day = btn.closest(".day-column").id
+    const mealItem = btn.closest('.meal-item');
+    const recipe_id = mealItem.querySelector(".recipe-link").id;
+    const day = btn.closest(".day-column").id;
 
     fetch("http://localhost/api/v1/api.php",{
         credentials: "include",
@@ -66,7 +67,7 @@ function requestRemove(event){
     .then(res => {
         if(res.status === "success"){
             showToast(true, res.message);
-            btn.parentElement.parentElement.remove();
+            mealItem.parentElement.remove();
         }
         else{
             showToast(false, `Error: ${res.message}`);
@@ -89,7 +90,7 @@ function requestRemove(event){
             const listContent = document.createElement('div');
             const link = document.createElement('a');
             const removeButton = document.createElement('button');
-            removeButton.classList = "remove-btn";
+            removeButton.classList = "icon-btn";
            
             
 
@@ -99,7 +100,13 @@ function requestRemove(event){
             link.id = recipe_id;
             link.textContent = recipe_title;
             link.href = `http://localhost/recipe-details.php?recipe_id=${recipe_id}`;
-            removeButton.textContent = "Remove";
+            removeButton.classList.add("icon-btn");
+            removeButton.innerHTML= `
+                <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 304 384">
+                    <path fill="#c47a2c" d="M21 341V85h256v256q0 18-12.5 30.5T235 384H64q-18 0-30.5-12.5T21 341zM299 21v43H0V21h75L96 0h107l21 21h75z"/>
+                </svg>
+            `;
+            removeButton.setAttribute("aria-label", "Remove recipe");
             removeButton.addEventListener('click', requestRemove);
 
             

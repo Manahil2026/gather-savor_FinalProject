@@ -39,7 +39,61 @@
 		<section class="search-section">
 			<form id="recipe-search-form">
 				<input type="text" id="search-box" placeholder="Search recipes..." required>
+				<h3>Filters: </h3>
+				<div class="recipeFilters">
+					<label class="recipeFilter">
+						<input name="cheap" type="checkbox">
+						<span>Cheap</span>
+					</label>
+
+					<label class="recipeFilter">
+						<input name="dairyFree" type="checkbox">
+						<span>Dairy Free</span>
+					</label>
+
+					<label class="recipeFilter">
+						<input name="glutenFree "type="checkbox">
+						<span>Gluten Free</span>
+					</label>
+
+
+					<label class="recipeFilter">
+						<input name="vegan" type="checkbox">
+						<span>Vegan</span>
+					</label>
+
+
+					<label class="recipeFilter">
+						<input name="vegetarian" type="checkbox">
+						<span>Vegetarian</span>
+					</label>
+
+
+					<label class="recipeFilter">
+						<input name="veryHealthy" type="checkbox">
+						<span>Very Healthy</span>
+					</label>
+
+
+					<label class="recipeFilter">
+						<input name="veryPopular" type="checkbox">
+						<span>Very Popular</span>
+					</label>
+
+
+					<label class="recipeFilter">
+						<input name="lowFodmap" type="checkbox">
+						<span>lowFodmap</span>
+					</label>
+
+
+					<label class="recipeFilter">
+						<input name="sustainable" type="checkbox">
+						<span>Sustainable</span>
+					</label>
+				</div>
 			</form>
+			
 		</section>
 
 		<!-- Populate-->

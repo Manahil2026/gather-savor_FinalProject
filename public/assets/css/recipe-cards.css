@@ -72,7 +72,6 @@ body {
 
 #recipe-search-form {
   width: 100%;
-  max-width: 800px;
   background: #fff2e0;
   border: 1px solid #ffb078;
   padding: 1rem 1.2rem;
@@ -80,8 +79,10 @@ body {
   box-shadow: 0 6px 20px rgba(0,0,0,0.06);
   display: flex;
   flex-wrap: nowrap;
+  flex-direction: column;
   gap: 0.75rem;
-  align-items: center;
+  align-items: stretch;
+  justify-content: center;
 }
 
 #recipe-search-form input,
@@ -101,6 +102,16 @@ body {
   border-color: #ff7e3d;
   box-shadow: 0 0 0 3px rgba(255,126,61,0.28);
 }
+
+.recipeFilters{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  transform: scale(1.1);
+  margin: 0 auto;
+}
+
 
 .card-grid {
   display: grid;
@@ -284,6 +295,9 @@ body {
     padding: 1.2rem 1.1rem;
   }
 }
+
+
+
 
 
 
